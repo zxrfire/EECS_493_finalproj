@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import key from './key'
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -23,6 +24,7 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
     render() {
         return (
+            <div>
             <GoogleMapReact
                 defaultCenter={this.props.center}
                 defaultZoom={this.props.zoom}
@@ -35,10 +37,14 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
                             lat={marker.lat}
                             lng={marker.lng}
                         />
-
                     )
                 })}
             </GoogleMapReact>
+        {/*<GooglePlacesAutocomplete*/}
+        {/*    apiKey={key}*/}
+        {/*    types={{}}*/}
+        {/*/>*/}
+            </div>
         );
     }
 }
