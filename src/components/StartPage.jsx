@@ -1,38 +1,18 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 import Form from "react-bootstrap/Form";
+import key from './key'
 import "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Col, Container, Row} from 'react-bootstrap';
+import Autocomplete from "react-google-autocomplete";
+
 
 // page to ask start date and the end data
-class StartPage extends Component {
-  constructor(props) {
-    super(props);
-  }
+const StartPage = props => {
 
-  state = {
-    start_date: null,
-    end_date: null,
-  };
 
-  render(){
     return (
-        // <div className="container">
-        //   <div className="row vh-100 d-flex justify-content-md-center align-items-center">
-        //     {/*<div className="col-md-12">*/}
-        //       <div
-        //           className="row text-center">
-        //         <h1 className={"display-1"}>Welcome to TripWithMe</h1>
-        //       </div>
-        //     {/*</div>*/}
-        //     {/*<div className="col-md-6">*/}
-        //     {/*  <div*/}
-        //     {/*      className="d-flex justify-content-md-center align-items-center vh-100">*/}
-        //     {/*    <p>Content 2</p>*/}
-        //     {/*  </div>*/}
-        //     {/*</div>*/}
-        //   </div>
-        // </div>
         <div
             className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
           <h1 className={"display-1"}>Welcome to <i>TripWithMe</i></h1>
@@ -40,45 +20,37 @@ class StartPage extends Component {
           <Form>
 
             <Row className={"mb-3 w-100"}>
-                <Row>
+                <Row className={"mt-1"}>
                   <label htmlFor="inputStartDate">Start Date</label>
                   <input type="date" className="form-control" id="inputEmail4"
-                         placeholder="Start Date" onInput={this.props.newStartDate}/>
+                         placeholder="Start Date" onInput={props.newStartDate}/>
                 </Row>
-                <Row>
+                <Row className={"mt-1"}>
                   <label htmlFor="inputStartDate">End Date</label>
                   <input type="date" className="form-control" id="inputPassword4"
-                         placeholder="EndDate"/>
+                         placeholder="EndDate" onInput={props.newEndDate}/>
+                </Row>
+                <Row className={"mt-1"}>
+                  <label htmlFor="inputCity">Choose Your City</label>
+                  <Autocomplete
+                      apiKey={key}
+                      style={{ width: "100%" }}
+                      onPlaceSelected={(place) => {
+                        console.log(place);
+                      }}
+                      options={{
+                        types: ["(regions)"],
+                      }}
+                      defaultValue="Singapore"
+                  />
                 </Row>
             </Row>
           </Form>
           <div className={"row mt-1 justify-content-center"}>
-            <button className="btn btn-primary">Get Started</button>
+            <Link to="/itinerary" className="btn btn-primary" onClick={props.handleCreateTrip}>Get Started</Link>
           </div>
         </div>
-      // <Container className={"jumbotron justify-content-md-center row h-100"}>
-      //   {/*Title*/}
-      //   <div className={"d-flex "}>
-      //
-      //     <div className={"row"}>
-      //       <h1 className={"display-1"}>Welcome to TripWithMe</h1>
-      //     </div>
-      //   </div>
-      //   <div className="form-row justify-content-md-center">
-      //     <div className="form-group col-md-6">
-      //       <label htmlFor="inputStartDate">Start Date</label>
-      //       <input type="date" className="form-control" id="inputEmail4"
-      //              placeholder="Start Date"/>
-      //     </div>
-      //     <div className="form-group col-md-6">
-      //       <label htmlFor="inputStartDate">End Date</label>
-      //       <input type="date" className="form-control" id="inputPassword4"
-      //              placeholder="EndDate"/>
-      //     </div>
-      //   </div>
-      // </Container>
     );
-  }
-}
+};
 
-export default StartPage;
+export default StartPage
