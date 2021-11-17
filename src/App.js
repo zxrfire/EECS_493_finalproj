@@ -14,13 +14,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
-        <div style={{height: '500px'}}>
-
-        </div>
-        <GoogleMap/>
-        </div>
+      {/*<header className="App-header">
+      </header>*/}
+      <GoogleMap/>
+    </div>
   );
 }
 

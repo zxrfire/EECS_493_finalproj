@@ -21,8 +21,9 @@ export class MapContainer extends Component {
                 lat: 49.2827291,
                 lng: -123.1207375
             },
-            markers: []
+            markers: [],
         };
+        this.clearMarks = this.clearMarks.bind(this);
     }
 
     handleChange = address => {
@@ -42,8 +43,14 @@ export class MapContainer extends Component {
             .catch(error => console.error('Error', error));
     };
 
+    clearMarks() {
+        this.setState({
+            markers: []
+        });
+    }
+
     render() {
-        let marks = this.state.markers
+        let marks = this.state.markers;
         return (
             <div id='googleMaps'>
                 <PlacesAutocomplete
@@ -85,6 +92,7 @@ export class MapContainer extends Component {
                         </div>
                     )}
                 </PlacesAutocomplete>
+                <button type="button" onClick={this.clearMarks}>Clear</button>
 
                 <Map
                     google={this.props.google}
@@ -107,7 +115,6 @@ export class MapContainer extends Component {
                             position={{ lat: marker.lat, lng: marker.lng }}
                         />
                     ))}
-
                 </Map>
             </div>
         )
