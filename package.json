@@ -4,7 +4,13 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
     "@googlemaps/react-wrapper": "^1.1.12",
+    "@jeremyling/react-material-ui-horizontal-scroll-list": "^0.2.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@mui/material": "^5.1.1",
     "@react-google-maps/api": "^2.7.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^11.2.7",
@@ -15,11 +21,13 @@
     "@types/react": "^16.14.21",
     "fast-equals": "^2.0.3",
     "google-maps-react": "^2.0.6",
+    "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-google-maps": "^9.4.5",
     "react-google-places-autocomplete": "^3.3.2",
     "react-places-autocomplete": "^7.3.0",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
@@ -50,6 +58,7 @@
   "devDependencies": {
     "google-map-react": "^2.1.10",
     "react-geocode": "^0.2.3",
-    "react-google-autocomplete": "^2.6.0"
+    "react-google-autocomplete": "^2.6.0",
+    "react-horizontal-scrolling-menu": "^2.5.2"
   }
 }
