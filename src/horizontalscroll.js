@@ -10,10 +10,12 @@ const getItems = () =>{
         ))
 };
 
-function Scroll() {
+export default function Scroll(props)  {
+
     const [items, setItems] = React.useState(getItems);
+    const [names, setNames] = React.useState([])
     const [selected, setSelected] = React.useState([]);
-    const [position, setPosition] = React.useState(0);
+    // const [position, setPosition] = React.useState(0);
 
     const isItemSelected = (id) => !!selected.find((el) => el === id);
 
@@ -37,7 +39,7 @@ function Scroll() {
                     itemId={id} // NOTE: itemId is required for track items
                     title={id}
                     key={id}
-                    attraction={MapContainer.state.names ? '' : MapContainer.state.names[0]}
+                    attraction={names}
                     onClick={handleClick(id)}
                     selected={isItemSelected(id)}
                 />)

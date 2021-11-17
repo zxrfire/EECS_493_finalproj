@@ -5,102 +5,8 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
-import {ScrollMenu, VisibilityContext} from "react-horizontal-scrolling-menu";
+import Scroll from './horizontalscroll'
 
-
-const getItems = () =>{
-    return Array(20)
-        .fill(0)
-        .map((_, ind) => ({
-                id: `(fixme replace with actual date) day-${ind}`}
-        ))
-    };
-
-function Scroll() {
-    const [items, setItems] = React.useState(getItems);
-    const [selected, setSelected] = React.useState([]);
-    const [position, setPosition] = React.useState(0);
-
-    const isItemSelected = (id) => !!selected.find((el) => el === id);
-
-    const handleClick = (id) => ({ getItemById, scrollToItem }) => {
-        const itemSelected = isItemSelected(id)
-
-        setSelected((currentSelected) =>
-            itemSelected
-                ? currentSelected.filter((el) => el !== id)
-                : currentSelected.concat(id)
-        );
-    }
-
-    return (
-        <ScrollMenu
-            // LeftArrow={LeftArrow}
-            // RightArrow={RightArrow}
-        >
-            {items.map(({ id }) => (
-                <Card
-                    itemId={id} // NOTE: itemId is required for track items
-                    title={id}
-                    key={id}
-                    attraction={'effiel tower'}
-                    onClick={handleClick(id)}
-                    selected={isItemSelected(id)}
-                />)
-            )}
-
-        </ScrollMenu>
-    );
-}
-
-// function LeftArrow() {
-//     const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext)
-//
-//     return (
-//         <Arrow disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
-//             Left
-//         </Arrow>
-//     );
-// }
-//
-// function RightArrow() {
-//     const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext)
-//
-//     return (
-//         <Arrow disabled={isLastItemVisible} onClick={() => scrollNext()}>
-//             Right
-//         </Arrow>
-//     );
-// }
-
-function Card({
-                  onClick,
-                  title,
-                attraction,
-              }) {
-    const visibility = React.useContext(VisibilityContext)
-
-    return (
-        <div
-            onClick={() => onClick(visibility)}
-            style={{
-                width: "160px",
-            }}
-            tabIndex={0}
-        >
-            <div className="card">
-                <div>{title}</div>
-                <div>attraction: {attraction}</div>
-
-            </div>
-            <div
-                style={{
-                    height: "200px",
-                }}
-            />
-        </div>
-    );
-}
 
 export class MapContainer extends Component {
     constructor(props) {
@@ -118,7 +24,7 @@ export class MapContainer extends Component {
                 lng: -123.1207375
             },
             markers: [],
-        };
+            names: []};
         this.clearMarks = this.clearMarks.bind(this);
     }
 
@@ -128,6 +34,7 @@ export class MapContainer extends Component {
 
     handleSelect = address => {
         this.setState({ address });
+        this.setState({ names: [...this.state.names, address] })
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))
             .then(latLng => {
@@ -147,10 +54,11 @@ export class MapContainer extends Component {
 // const menu = {}
     render() {
         let marks = this.state.markers;
+        let data1 = this.state.names
         return (
             <div id='googleMaps'>
                 <Scroll>
-                    {/*data={menu}*/}
+                    data ={data1}
                 </Scroll>
                 <PlacesAutocomplete
                     value={this.state.address}
