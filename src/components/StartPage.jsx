@@ -6,6 +6,15 @@ import {Col, Container, Row} from 'react-bootstrap';
 
 // page to ask start date and the end data
 class StartPage extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  state = {
+    start_date: null,
+    end_date: null,
+  };
+
   render(){
     return (
         // <div className="container">
@@ -34,7 +43,7 @@ class StartPage extends Component {
                 <Row>
                   <label htmlFor="inputStartDate">Start Date</label>
                   <input type="date" className="form-control" id="inputEmail4"
-                         placeholder="Start Date"/>
+                         placeholder="Start Date" onInput={this.props.newStartDate}/>
                 </Row>
                 <Row>
                   <label htmlFor="inputStartDate">End Date</label>
@@ -44,7 +53,6 @@ class StartPage extends Component {
             </Row>
           </Form>
           <div className={"row mt-1 justify-content-center"}>
-
             <button className="btn btn-primary">Get Started</button>
           </div>
         </div>

@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    // dev tools
+    <script src="http://localhost:8097"></script>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
