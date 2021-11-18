@@ -1,16 +1,88 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {ScrollMenu, VisibilityContext} from "react-horizontal-scrolling-menu";
 
 
-const getItems = () =>{
-    return Array(14)
-        .fill(0)
-        .map((_, ind) => ({
-                id: `(fixme replace with actual date) day-${ind}`}
-        ))
-};
+export default class Scroll extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: [],
+            names: [],
+            selected: [],
+        };
+        this.isItemSelected = this.isItemSelected.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.getItems = this.getItems.bind(this);
+        this.setSelected = this.setSelected.bind(this);
+    }
 
-export default function Scroll(props)  {
+    isItemSelected(id) {
+        return !!this.state.selected.find((el) => el === id);
+    }
+
+    handleClick = (id) => ({ getItemById, scrollToItem }) => {
+        const itemSelected = this.isItemSelected(id);
+        this.setSelected(id, itemSelected);
+
+        /*setSelected((currentSelected) =>
+            itemSelected
+                ? currentSelected.filter((el) => el !== id)
+                : currentSelected.concat(id)
+        );*/
+    }
+
+    setSelected(id, itemSelected) {
+        let currentSelected = [];
+        if (itemSelected) {
+            currentSelected = this.state.selected.filter((el) => el !== id);
+        }
+        else {
+            currentSelected = this.state.selected.concat(id);
+        }
+        this.setState({
+            selected: currentSelected,
+        });
+    }
+
+    getItems() {
+        return Array(14)
+            .fill(0)
+            .map((_, ind) => ({
+                    id: `(fixme replace with actual date) day-${ind}`}
+            ))
+    }
+
+    componentDidMount() {
+        this.setState({
+            selected: this.getItems(),
+        });
+        
+    }
+
+    render() {
+        let {items, names} = this.state;
+        return (
+            <ScrollMenu
+                // LeftArrow={LeftArrow}
+                // RightArrow={RightArrow}
+            >
+                {items.map(({ id }) => (
+                    <Card
+                        itemId={id} // NOTE: itemId is required for track items
+                        title={id}
+                        key={id}
+                        attraction={names}
+                        onClick={this.handleClick(id)}
+                        selected={this.isItemSelected(id)}
+                    />)
+                )}
+    
+            </ScrollMenu>
+        );
+    }
+}
+
+/*export default function Scroll(props)  {
 
     const [items, setItems] = React.useState(getItems);
     const [names, setNames] = React.useState([])
@@ -47,7 +119,7 @@ export default function Scroll(props)  {
 
         </ScrollMenu>
     );
-}
+}*/
 
 // function LeftArrow() {
 //     const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext)
