@@ -14,45 +14,33 @@ class App extends Component{
     super(props);
     // initialise the state variables
     this.state = {
-      trip : {
         startDate: null,
         endDate: null,
         cities: [],
         days: []
-      },
     }
   };
   handleNewStartDate = (event) => {
-      const newTrip = {...this.state.trip};
-      newTrip["startDate"] = moment().format(event.target.value);
-      console.log(newTrip["startDate"]);
-      this.setState({trip: newTrip});
+      this.setState({startDate: moment().format(event.target.value)});
   };
   handleNewEndDate = (event) => {
-    const newTrip = {...this.state.trip};
-    newTrip["endDate"] = moment().format(event.target.value);
-    console.log(newTrip["endDate"]);
-    this.setState({trip: newTrip});
+    this.setState({endDate:  moment().format(event.target.value)});
   };
   handleNewCity = (city) => {
-    const newTrip = {...this.state.trip};
-    newTrip["cities"].append(city);
-    this.setState({trip: newTrip});
+    this.setState({cities: [...this.state.cities, city]});
   };
   handleCreateTrip = (event) => {
       console.log("Creating new Trip");
-      const newTrip = {...this.state.trip};
-      newTrip.days = [];
+      let newDays = [];
       // generate the trip dates
       // TODO: iterate through the days
       // If you want an inclusive end date (fully-closed interval)
-      for (let m = moment(newTrip.startDate);
-        m.diff(newTrip.endDate, 'days') <= 0; m.add(1, 'days')) {
+      for (let m = moment(this.state.startDate);
+        m.diff(this.state.endDate, 'days') <= 0; m.add(1, 'days')) {
         console.log(m.format('YYYY-MM-DD'));
-        newTrip.days.push(new Day(m.format('YYYY-MM-DD')));
+        newDays.push(new Day(m.format('YYYY-MM-DD')));
       }
-      console.log(newTrip.days);
-      this.setState({trip: newTrip});
+      this.setState({days: newDays});
   };
   render(){
     return (
@@ -71,7 +59,7 @@ class App extends Component{
                     <ItineraryPage></ItineraryPage>
                   }/>
                 <Route path="/map" element={
-                  <MapContainer trip={this.state.trip}></MapContainer>
+                  <MapContainer {...this.state}></MapContainer>
                 } />
               </Routes>
           </div>

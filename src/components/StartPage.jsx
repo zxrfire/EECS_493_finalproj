@@ -38,12 +38,12 @@ const StartPage = props => {
                       style={{ width: "100%" }}
                       onPlaceSelected={(place) => {
                         console.log(place);
-                        this.props.handleNewCity(place);
+                        props.newCity(place);
                       }}
                       options={{
                         types: ["(regions)"],
                       }}
-                      defaultValue="Singapore"
+                      defaultValue=""
                   />
                 </Row>
             </Row>

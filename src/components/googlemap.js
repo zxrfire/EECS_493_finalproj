@@ -77,7 +77,7 @@ export class MapContainer extends Component {
                 LeftArrow={LeftArrow}
                 RightArrow={RightArrow}
             >
-              {this.props.trip.days.map((day, id) => this.renderDayCard(day, id))}
+              {this.props.days.map((day, id) => this.renderDayCard(day, id))}
             </ScrollMenu>
             <PlacesAutocomplete
                 value={this.state.address}
