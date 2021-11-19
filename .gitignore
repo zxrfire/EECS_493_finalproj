@@ -94,8 +94,11 @@ files_for_autograder_io/
 
 # Google Drive and Dropbox
 Icon
+key.txt
+key.js
 .dropbox*
 
 .idea/
 
 key.js
+package-lock.json
