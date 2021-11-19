@@ -7,7 +7,7 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete';
 import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu';
 import Scroll from './horizontalscroll';
-import Card from './Card';
+import DayCard from './DayCard';
 
 import {Container} from 'react-bootstrap';
 
@@ -73,8 +73,8 @@ export class MapContainer extends Component {
 
   renderDayCard = (day, idx) => {
     return (
-        <Card day={day}>
-        </Card>
+        <DayCard day={day}>
+        </DayCard>
     );
   };
 
