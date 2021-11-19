@@ -68,7 +68,7 @@ export class MapContainer extends Component {
                     RightArrow={RightArrow}
                     >
                     {this.state.names.map((id) => (
-                        
+
                         <Card
                         itemId={id} // NOTE: itemId is required for track items
                         title={id}
@@ -118,8 +118,9 @@ export class MapContainer extends Component {
                     )}
                 </PlacesAutocomplete>
                 <button type="button" onClick={this.clearMarks}>Clear</button>
-
+                {/*<div style={}>*/}
                 <Map
+                    style={{height: '50%', width: '50%'}}
                     google={this.props.google}
                     initialCenter={{
                         lat: this.state.mapCenter.lat,
@@ -141,6 +142,7 @@ export class MapContainer extends Component {
                         />
                     ))}
                 </Map>
+                {/*</div>*/}
             </div>
         )
     }
@@ -181,7 +183,7 @@ function Card({
     itemId
   }) {
     const visibility = React.useContext(VisibilityContext);
-  
+
     return (
       <div
         onClick={() => onClick(visibility)}
