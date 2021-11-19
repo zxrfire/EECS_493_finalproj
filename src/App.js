@@ -27,14 +27,7 @@ class App extends Component{
     this.setState({endDate:  moment().format(event.target.value)});
   };
   handleNewCity = (city) => {
-<<<<<<< HEAD
-    const newTrip = {...this.state.trip};
-    newTrip["cities"].push(city);
-    this.setState({ trip['cities']: [...this.state.myArray, 'new value'] }) //simple value
-      // this.setState({trip: newTrip});
-=======
     this.setState({cities: [...this.state.cities, city]});
->>>>>>> 0a4e298c16141b453d5df6f43758b693acecf96a
   };
   handleCreateTrip = (event) => {
       console.log("Creating new Trip");

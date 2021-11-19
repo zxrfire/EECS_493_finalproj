@@ -29,7 +29,7 @@ export class MapContainer extends Component {
       names: [],
     };
     this.clearMarks = this.clearMarks.bind(this);
-    geocodeByAddress(props.trip.cities[0]).
+    geocodeByAddress(props.cities[0]['formatted_address']).
       then(results => getLatLng(results[0])).
       then(latLng => {
           console.log('Success', latLng);
