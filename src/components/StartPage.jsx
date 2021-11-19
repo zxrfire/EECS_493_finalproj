@@ -50,7 +50,6 @@ const StartPage = props => {
           </Form>
           <div className={"row mt-1 justify-content-center"}>
             <Link to="/map" className="btn btn-primary" onClick={props.newTrip}>Get Started</Link>
-
           </div>
         </div>
     );

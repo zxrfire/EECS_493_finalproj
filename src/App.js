@@ -71,7 +71,7 @@ class App extends Component{
                     <ItineraryPage></ItineraryPage>
                   }/>
                 <Route path="/map" element={
-                  <MapContainer></MapContainer>
+                  <MapContainer trip={this.state.trip}></MapContainer>
                 } />
               </Routes>
           </div>
