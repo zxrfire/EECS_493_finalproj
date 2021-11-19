@@ -1,0 +1,21 @@
+#my-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2% 2% 2% 2%
+}
+
+.centeredRow{
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+
+#map{
+    padding: 5% 5% 5% 5%;
+    position: relative;
+    height: 75%;
+    width: 75%;
+}

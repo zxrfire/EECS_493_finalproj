@@ -2,6 +2,7 @@ import React from 'react';
 import {VisibilityContext} from 'react-horizontal-scrolling-menu';
 import {Card, ListGroup, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/DayCard.css'
 import moment from 'moment';
 
 
@@ -23,7 +24,7 @@ const DayCard = (props) => {
       //     tabIndex={0}
       // >
      <React.Fragment>
-       <Card style={{ width: '18rem' }}>
+       <Card className={"day-card"}>
          <Card.Body>
            <Card.Title>{getCardTitle()}</Card.Title>
            <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
