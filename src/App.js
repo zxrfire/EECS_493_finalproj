@@ -36,8 +36,9 @@ class App extends Component{
   };
   handleNewCity = (city) => {
     const newTrip = {...this.state.trip};
-    newTrip["cities"].append(city);
-    this.setState({trip: newTrip});
+    newTrip["cities"].push(city);
+    this.setState({ trip['cities']: [...this.state.myArray, 'new value'] }) //simple value
+      // this.setState({trip: newTrip});
   };
   handleCreateTrip = (event) => {
       console.log("Creating new Trip");
@@ -73,7 +74,6 @@ class App extends Component{
                 <Route path="/map" element={
                   <MapContainer
                       trip={this.state.trip}
-                      city={this.state.cities}
                   ></MapContainer>
                 } />
               </Routes>

@@ -29,14 +29,14 @@ export class MapContainer extends Component {
       names: [],
     };
     this.clearMarks = this.clearMarks.bind(this);
-    // geocodeByAddress(this.props.city).
-    //   then(results => getLatLng(results[0])).
-    //   then(latLng => {
-    //       console.log('Success', latLng);
-    //       this.setState({markers: [...this.state.markers, latLng]});
-    //       // update center state
-    //       this.setState({mapCenter: latLng});
-    // })
+    geocodeByAddress(props.trip.cities[0]).
+      then(results => getLatLng(results[0])).
+      then(latLng => {
+          console.log('Success', latLng);
+          this.setState({markers: [...this.state.markers, latLng]});
+          // update center state
+          this.setState({mapCenter: latLng});
+    })
   }
 
     // componentDidMount(){
