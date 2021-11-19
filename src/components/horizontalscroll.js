@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import Card from "./Card"
+import DayCard from "./DayCard"
 /*const getItems = () =>
   Array(20)
     .fill(0)
@@ -42,7 +42,7 @@ function Scroll(props) {
         >
           {items.map((id) => (
             
-            <Card
+            <DayCard
               itemId={id} // NOTE: itemId is required for track items
               title={id}
               key={id}
