@@ -15,6 +15,16 @@ const DayCard = (props) => {
     return day.date.format('LL');
   };
 
+  const renderList = () => {
+    const places_names = day.places.map(place => place.formatted_address)
+      .map(name => (<li className="list-group-item">{name}</li>));
+    return (
+        <ul className="list-group list-group-flush">
+          {places_names}
+        </ul>
+    );
+  };
+
   return (
       // <Card.Title
       //     // onClick={() => onClick(visibility)}

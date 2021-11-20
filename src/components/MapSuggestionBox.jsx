@@ -6,26 +6,32 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const MapSuggestionBox = (props) => {
 
   const renderSuggestion = (getSuggestionItemProps, suggestion) => {
-    let className = 'suggestion-item';
+    let className = 'list-group-item list-group-item-action';
     if (suggestion.active){
-      className += "--active";
+      className += " active";
     }
     // const className = suggestion.active ? 'suggestion-item--active':'suggestion-item';
     let style = {
       cursor: 'pointer',
-      backgroundColor: suggestion.active ? '#fafafa' : '#ffffff'
+      // backgroundColor: suggestion.active ? '#fafafa' : '#ffffff'
     };
     return (
         <div
             {...getSuggestionItemProps(suggestion,
                 {className, style})}>
-          <span>{suggestion.description}</span>
+          <a>{suggestion.description}</a>
+          {/*<span></span>*/}
         </div>
     );
   };
 
   const renderSuggestions = (getSuggestionItemProps, suggestions) => {
-      return suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion));
+      return (
+          <div className="list-group">
+            {suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion))}
+          </div>
+      );
+      // return suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion));
   };
 
   const renderInput = (getInputProps) => {
@@ -35,7 +41,7 @@ const MapSuggestionBox = (props) => {
     inputProps["className"] += "form-control";
     return (
         <div className="input-group mb-3" style={{"margin-top": "1%"}}>
-          <input {...inputProps} style={{"width": "100%"}}/>
+          <input {...inputProps} />
         </div>
     );
   };

@@ -3,7 +3,7 @@ import moment from 'moment';
 class Day{
   constructor(date) {
     this.date = moment(date);
-    this.attractions = []
+    this.places = []; // a list of location objects
   }
 }
 
