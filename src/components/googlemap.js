@@ -78,6 +78,10 @@ export class MapContainer extends Component {
   render() {
     let marks = this.state.markers;
     //let data1 = this.state.names;
+
+    const shadow = {
+      "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+    };
     return (
         <div id="my-container">
               {/*// Array of Date cards*/}
@@ -94,7 +98,8 @@ export class MapContainer extends Component {
               {/*  onSelect={this.handleNewAttraction}*/}
 
               {/*></MapSuggestionBox>*/}
-              <Button onClick={this.clearMarks}>Clear</Button>
+              <Button className={"shadow p-2 mb-5 rounded"}
+                      onClick={this.clearMarks}>Clear</Button>
 
               <div className={"centeredRow"} >
                   <Map
@@ -106,7 +111,7 @@ export class MapContainer extends Component {
                         "margin-left": "12.5%",
                         "margin-right": "12.5%",
                         width: "75%",
-                        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                        ...shadow
                       }}
                       google={this.props.google}
                       initialCenter={{
