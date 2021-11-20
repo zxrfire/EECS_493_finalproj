@@ -42,20 +42,20 @@ const DayCard = (props) => {
   };
 
   return (
-     <React.Fragment>
-       <Card className="day_card">
-         <Card.Body>
-           <Card.Title>{getCardTitle()}</Card.Title>
-           <Card.Subtitle className="mb-2 text-muted">{getCardSubtitle()}</Card.Subtitle>
+       <div className={"card day_card shadow p-3 mb-5 bg-white rounded"}
+             // style={{"margin-left": "4%", "margin-right": "4%"}}
+       >
+         <div className={"card-body"}>
+           <div className={"card-title"}>{getCardTitle()}</div>
+           <div className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</div>
            {renderList()}
            <MapSuggestionBox
             value={address}
             onChange={handleChange}
             onSelect={handleSelect}/>
           <Button variant="primary">Go somewhere</Button>
-         </Card.Body>
-       </Card>
-     </React.Fragment>
+         </div>
+       </div>
   );
 };
 

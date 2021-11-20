@@ -11,7 +11,7 @@ import Scroll from './horizontalscroll';
 import DayCard from './DayCard';
 import MapSuggestionBox from './MapSuggestionBox';
 
-import {Container, Row, Col, Button} from 'react-bootstrap';
+import {Container, Row, Col, Button, CardGroup} from 'react-bootstrap';
 
 export class MapContainer extends Component {
   constructor(props) {
@@ -82,8 +82,10 @@ export class MapContainer extends Component {
         <div id="my-container">
               {/*// Array of Date cards*/}
                 <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+                  {/*<CardGroup>*/}
                   {this.props.days.map(
                       (day, id) => this.renderDayCard(day, id))}
+                  {/*</CardGroup>*/}
                 </ScrollMenu>
 
               {/*<MapSuggestionBox*/}
@@ -96,13 +98,16 @@ export class MapContainer extends Component {
 
               <div className={"centeredRow"} >
                   <Map
+                      className={"shadow p-3 mb-5 bg-white rounded"}
                       style={{ padding: "5% 5% 5% 5%",
                         position: "relative",
                         height: "75%",
                         "margin-top": "2%",
                         "margin-left": "12.5%",
                         "margin-right": "12.5%",
-                        width: "75%"}}
+                        width: "75%",
+                        "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+                      }}
                       google={this.props.google}
                       initialCenter={{
                         lat: this.state.mapCenter.lat,
