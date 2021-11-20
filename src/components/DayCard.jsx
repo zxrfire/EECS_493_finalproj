@@ -45,7 +45,7 @@ const DayCard = (props) => {
        <div className={"card day_card shadow p-3 mb-5 bg-white rounded"}
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
-         <div className={"card-body"}>
+         <div className={"card-body"} style={{'min-height': '450px', 'max-height': '500px'}}>
            <div className={"card-title"}>{getCardTitle()}</div>
            <div className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</div>
            {renderList()}

@@ -50,7 +50,8 @@ const MapSuggestionBox = (props) => {
             <div>
               {renderInput(getInputProps)}
 
-              <div className="autocomplete-dropdown-container">
+              <div className="autocomplete-dropdown-container" style={{position: 'absolute'}}
+              >
                 {loading && <div>Loading...</div>}
                 {renderSuggestions(getSuggestionItemProps, suggestions)}
               </div>
