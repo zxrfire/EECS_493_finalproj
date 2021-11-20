@@ -9,6 +9,7 @@ import PlacesAutocomplete, {
 import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu';
 import Scroll from './horizontalscroll';
 import DayCard from './DayCard';
+import MapSuggestionBox from './MapSuggestionBox';
 
 import {Container, Row, Col, Button} from 'react-bootstrap';
 
@@ -91,48 +92,13 @@ export class MapContainer extends Component {
                       (day, id) => this.renderDayCard(day, id))}
                 </ScrollMenu>
 
-                <PlacesAutocomplete
-                    value={this.state.address}
-                    onChange={this.handleChange}
-                    onSelect={this.handleSelect}
-                    requestOptions={'tourist-attractions'}
-                >
-                  {({getInputProps,suggestions,getSuggestionItemProps, loading,}) => (
-                      <div>
-                        <div className="centeredRow">
-                          <input
-                              {...getInputProps({
-                                placeholder: 'Search Places ...',
-                                className: 'location-search-input',
-                              })}
-                          />
-                        </div>
-                        <div className="autocomplete-dropdown-container">
-                          {loading && <div>Loading...</div>}
-                          {suggestions.map(suggestion => {
-                            const className = suggestion.active
-                                ? 'suggestion-item--active'
-                                : 'suggestion-item';
-                            // inline style for demonstration purpose
-                            const style = suggestion.active
-                                ? {backgroundColor: '#fafafa', cursor: 'pointer'}
-                                :
-                                {backgroundColor: '#ffffff', cursor: 'pointer'};
-                            return (
-                                <div
-                                    {...getSuggestionItemProps(suggestion,
-                                        {className, style},
-                                    )}
-                                >
-                                  <span>{suggestion.description}</span>
-                                </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                  )}
-                </PlacesAutocomplete>
-                    <Button onClick={this.clearMarks}>Clear</Button>
+              <MapSuggestionBox
+                value={this.state.address}
+                onChange={this.handleChange}
+                onSelect={this.handleSelect}
+
+              ></MapSuggestionBox>
+              <Button onClick={this.clearMarks}>Clear</Button>
 
               <div className={"centeredRow"} >
                   <Map
