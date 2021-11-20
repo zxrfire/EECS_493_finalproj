@@ -31,7 +31,7 @@ export class MapContainer extends Component {
       names: [],
     };
     this.clearMarks = this.clearMarks.bind(this);
-    this.updateMapCenter(props.cities[0]['formatted_address']);
+    this.updateMap(props.cities[0]['formatted_address']);
     geocodeByAddress().
         then(results => getLatLng(results[0])).
         then(latLng => {
@@ -41,15 +41,11 @@ export class MapContainer extends Component {
           this.setState({mapCenter: latLng});
         });
   }
+  getLocationObject = address => geocodeByAddress(address)
+      .then(results => getLatLng(results[0]));
 
-  // componentDidMount(){
-  //   this.updateMapCenter(this.props.city[0])
-  // }
-
-  updateMapCenter = (address) =>
-      geocodeByAddress(address).
-          then(results => getLatLng(results[0])).
-          then(latLng => {
+  updateMap = (address) =>
+          this.getLocationObject(address).then(latLng => {
             console.log('Success', latLng);
             this.setState({markers: [...this.state.markers, latLng]});
             // update center state
@@ -57,14 +53,15 @@ export class MapContainer extends Component {
           }).
           catch(error => console.error('Error', error));
 
+
   handleChange = address => {
     this.setState({address});
   };
 
-  handleSelect = address => {
+  handleNewAttraction = address => {
     this.setState({address});
     this.setState({names: [...this.state.names, address]});
-    this.updateMapCenter(address);
+    this.updateMap(address);
     //Call Scroll's setItems method now
   };
 
@@ -74,9 +71,9 @@ export class MapContainer extends Component {
     });
   }
 
-  renderDayCard = (day, idx) => {
+  renderDayCard = (day, id) => {
     return (
-        <DayCard day={day}>
+        <DayCard day={day} key={id} id={id} newPlace={this.handleNewAttraction}>
         </DayCard>
     );
   };
@@ -92,12 +89,12 @@ export class MapContainer extends Component {
                       (day, id) => this.renderDayCard(day, id))}
                 </ScrollMenu>
 
-              <MapSuggestionBox
-                value={this.state.address}
-                onChange={this.handleChange}
-                onSelect={this.handleSelect}
+              {/*<MapSuggestionBox*/}
+              {/*  value={this.state.address}*/}
+              {/*  onChange={this.handleChange}*/}
+              {/*  onSelect={this.handleNewAttraction}*/}
 
-              ></MapSuggestionBox>
+              {/*></MapSuggestionBox>*/}
               <Button onClick={this.clearMarks}>Clear</Button>
 
               <div className={"centeredRow"} >

@@ -42,6 +42,10 @@ class App extends Component{
       }
       this.setState({days: newDays});
   };
+
+  handleNewAttraction = (indexOfDay, ) =>{
+
+  };
   render(){
     return (
         <BrowserRouter>

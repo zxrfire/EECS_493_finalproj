@@ -16,22 +16,17 @@ const MapSuggestionBox = (props) => {
       // backgroundColor: suggestion.active ? '#fafafa' : '#ffffff'
     };
     return (
-        <div
-            {...getSuggestionItemProps(suggestion,
-                {className, style})}>
-          <a>{suggestion.description}</a>
-          {/*<span></span>*/}
-        </div>
+          <a {...getSuggestionItemProps(suggestion,
+              {className, style})}>{suggestion.description}</a>
     );
   };
 
   const renderSuggestions = (getSuggestionItemProps, suggestions) => {
       return (
-          <div className="list-group">
+          <div className="list-group" style={{"margin-bottom": "1%"}}>
             {suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion))}
           </div>
       );
-      // return suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion));
   };
 
   const renderInput = (getInputProps) => {
