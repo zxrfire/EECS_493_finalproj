@@ -18,7 +18,7 @@ export class MapContainer extends Component {
     super(props);
     this.state = {
       // for google map places autocomplete
-      address: '',
+      // address: '',
 
       showingInfoWindow: false,
       activeMarker: {},
@@ -28,24 +28,17 @@ export class MapContainer extends Component {
         lng: -123.1207375,
       },
       markers: [],
-      names: [],
+      // names: [],
     };
     this.clearMarks = this.clearMarks.bind(this);
-    this.updateMap(props.cities[0]['formatted_address']);
-    geocodeByAddress().
-        then(results => getLatLng(results[0])).
-        then(latLng => {
-          console.log('Success', latLng);
-          this.setState({markers: [...this.state.markers, latLng]});
-          // update center state
-          this.setState({mapCenter: latLng});
-        });
+    if (props.cities.length !== 0){
+      this.updateMap(props.cities[0]);
+    }
   }
-  getLocationObject = address => geocodeByAddress(address)
-      .then(results => getLatLng(results[0]));
+  getLocationObject = address => geocodeByAddress(address);
 
-  updateMap = (address) =>
-          this.getLocationObject(address).then(latLng => {
+  updateMap = (newGeoObj) =>
+          getLatLng(newGeoObj).then(latLng => {
             console.log('Success', latLng);
             this.setState({markers: [...this.state.markers, latLng]});
             // update center state
@@ -54,15 +47,19 @@ export class MapContainer extends Component {
           catch(error => console.error('Error', error));
 
 
-  handleChange = address => {
-    this.setState({address});
-  };
+  // handleChange = address => {
+  //   this.setState({address});
+  // };
 
-  handleNewAttraction = address => {
-    this.setState({address});
-    this.setState({names: [...this.state.names, address]});
-    this.updateMap(address);
-    //Call Scroll's setItems method now
+  handleNewAttraction = async (id, address) => {
+    console.log(address);
+    // this.setState({address});
+    // this.setState({names: [...this.state.names, address]});
+    // this.updateMap(address);
+    const newAttractionGeoObj =  (await this.getLocationObject(address))[0];
+    console.log(newAttractionGeoObj);
+    await this.updateMap(newAttractionGeoObj);
+    this.props.newAttraction(id, address);
   };
 
   clearMarks() {

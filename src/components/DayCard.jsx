@@ -26,13 +26,13 @@ const DayCard = (props) => {
     setAddress(address);
   };
 
-  const handleSelect = address =>{
+  const handleSelect = async (address) =>{
     setAddress(address);
-    newPlace(id, address);
+    await newPlace(id, address);
   };
 
   const renderList = () => {
-    const places_names = day.places.map(place => place.formatted_address)
+    const places_names = day.places
       .map(name => (<ListGroup.Item>{name}</ListGroup.Item>));
     return (
         <ListGroup variant="flush">
@@ -43,7 +43,7 @@ const DayCard = (props) => {
 
   return (
      <React.Fragment>
-       <Card className={"day-card"}>
+       <Card className="day_card">
          <Card.Body>
            <Card.Title>{getCardTitle()}</Card.Title>
            <Card.Subtitle className="mb-2 text-muted">{getCardSubtitle()}</Card.Subtitle>

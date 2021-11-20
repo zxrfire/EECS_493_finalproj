@@ -43,8 +43,10 @@ class App extends Component{
       this.setState({days: newDays});
   };
 
-  handleNewAttraction = (indexOfDay, ) =>{
-
+  handleNewAttraction = (indexOfDay, newAddress) =>{
+      let newDays = [...this.state.days];
+      newDays[indexOfDay].places.push(newAddress);
+      this.setState({days: newDays});
   };
   render(){
     return (
@@ -63,7 +65,8 @@ class App extends Component{
                     <ItineraryPage></ItineraryPage>
                   }/>
                 <Route path="/map" element={
-                  <MapContainer {...this.state}></MapContainer>
+                  <MapContainer {...this.state}
+                  newAttraction={this.handleNewAttraction}></MapContainer>
                 } />
               </Routes>
           </div>
