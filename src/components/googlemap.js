@@ -97,12 +97,7 @@ export class MapContainer extends Component {
                     onSelect={this.handleSelect}
                     requestOptions={'tourist-attractions'}
                 >
-                  {({
-                      getInputProps,
-                      suggestions,
-                      getSuggestionItemProps,
-                      loading,
-                    }) => (
+                  {({getInputProps,suggestions,getSuggestionItemProps, loading,}) => (
                       <div>
                         <div className="centeredRow">
                           <input
@@ -120,8 +115,7 @@ export class MapContainer extends Component {
                                 : 'suggestion-item';
                             // inline style for demonstration purpose
                             const style = suggestion.active
-                                ?
-                                {backgroundColor: '#fafafa', cursor: 'pointer'}
+                                ? {backgroundColor: '#fafafa', cursor: 'pointer'}
                                 :
                                 {backgroundColor: '#ffffff', cursor: 'pointer'};
                             return (
