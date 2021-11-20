@@ -1,6 +1,7 @@
 import React from 'react';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import "../style/MapContainer.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const MapSuggestionBox = (props) => {
 
@@ -27,6 +28,18 @@ const MapSuggestionBox = (props) => {
       return suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion));
   };
 
+  const renderInput = (getInputProps) => {
+    let inputProps = getInputProps({
+        placeholder: 'Search for Attractions to Add To Your Iternary',
+        className: 'location-search-input'});
+    inputProps["className"] += "form-control";
+    return (
+        <div className="input-group mb-3" style={{"margin-top": "1%"}}>
+          <input {...inputProps} style={{"width": "100%"}}/>
+        </div>
+    );
+  };
+
   return (
       <PlacesAutocomplete
           {...props}
@@ -34,14 +47,7 @@ const MapSuggestionBox = (props) => {
       >
         {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
             <div>
-              <div className="centeredRow">
-                <input
-                    {...getInputProps({
-                      placeholder: 'Search Places ...',
-                      className: 'location-search-input',
-                    })
-                    }/>
-              </div>
+              {renderInput(getInputProps)}
 
               <div className="autocomplete-dropdown-container">
                 {loading && <div>Loading...</div>}
