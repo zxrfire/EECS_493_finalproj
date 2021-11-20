@@ -10,6 +10,7 @@ import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu';
 import Scroll from './horizontalscroll';
 import DayCard from './DayCard';
 import MapSuggestionBox from './MapSuggestionBox';
+import Recommendation from './recommendation';
 
 import {Container, Row, Col, Button, CardGroup} from 'react-bootstrap';
 
@@ -134,8 +135,11 @@ export class MapContainer extends Component {
                         />
                     ))}
                   </Map>
-
               </div>
+              <Recommendation 
+                cityObj={this.props.cities[0]}
+              >
+              </Recommendation>
 
         </div>
     );
