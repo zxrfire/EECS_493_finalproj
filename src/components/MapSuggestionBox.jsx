@@ -23,7 +23,7 @@ const MapSuggestionBox = (props) => {
 
   const renderSuggestions = (getSuggestionItemProps, suggestions) => {
       return (
-          <div className="list-group" style={{"margin-bottom": "1%", width: "75%"}}>
+          <div className="list-group" style={{"margin-bottom": "1%", width: "100%"}}>
             {suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion))}
           </div>
       );
@@ -36,7 +36,7 @@ const MapSuggestionBox = (props) => {
     inputProps["className"] += "form-control";
     return (
         <div className="input-group mb-3" style={{"margin-top": "1%"}}>
-          <input {...inputProps} />
+          <input {...inputProps} style={{"width": "90%"}} />
         </div>
     );
   };

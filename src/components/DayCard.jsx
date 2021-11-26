@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import {VisibilityContext} from 'react-horizontal-scrolling-menu';
 import {Card, ListGroup, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/DayCard.css'
+import '../style/MapContainer.css'
 import MapSuggestionBox from './MapSuggestionBox';
 import moment from 'moment';
 
@@ -31,6 +32,15 @@ const DayCard = (props) => {
     await newPlace(id, address);
   };
 
+  const handleDelete = () => {
+
+  };
+
+  // handle clearing all items
+  const handleClear = () => {
+
+  };
+
   const renderList = () => {
     const places_names = day.places
       .map(name => (<ListGroup.Item>{name}</ListGroup.Item>));
@@ -42,20 +52,33 @@ const DayCard = (props) => {
   };
 
   return (
+      // <React.Fragment>
+      //   <div className="card" style="width: 18rem;">
+      //     <div className="card-body">
+      //       <h5 className="card-title">Card title</h5>
+      //       <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      //       <p className="card-text">Some quick example text to build on the
+      //         card title and make up the bulk of the card's content.</p>
+      //       <a href="#" className="card-link">Card link</a>
+      //       <a href="#" className="card-link">Another link</a>
+      //     </div>
+      //   </div>
        <div className={"card day_card shadow p-3 mb-5 bg-white rounded"}
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
-         <div className={"card-body"} style={{'min-height': '450px', 'max-height': '500px'}}>
-           <div className={"card-title"}>{getCardTitle()}</div>
-           <div className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</div>
+         <div className={"card-body"}
+              style={{'min-height': '450px', 'max-height': '500px'}}>
+           <h5 className="card-title">{getCardTitle()}</h5>
+           <h6 className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</h6>
            {renderList()}
            <MapSuggestionBox
             value={address}
             onChange={handleChange}
             onSelect={handleSelect}/>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="danger" onClick={handleClear}>Clear</Button>
          </div>
        </div>
+      // </React.Fragment>
   );
 };
 

@@ -93,12 +93,6 @@ export class MapContainer extends Component {
                   {/*</CardGroup>*/}
                 </ScrollMenu>
 
-              {/*<MapSuggestionBox*/}
-              {/*  value={this.state.address}*/}
-              {/*  onChange={this.handleChange}*/}
-              {/*  onSelect={this.handleNewAttraction}*/}
-
-              {/*></MapSuggestionBox>*/}
               <Button className={"shadow p-2 mb-5 rounded"}
                       onClick={this.clearMarks}>Clear</Button>
 
