@@ -43,11 +43,29 @@ class App extends Component{
       this.setState({days: newDays});
   };
 
-  handleNewAttraction = (indexOfDay, newAddress) =>{
+  handleNewAttraction = (indexOfDay, newAddress, newAddressObj) =>{
       let newDays = [...this.state.days];
-      newDays[indexOfDay].places.push(newAddress);
+      newDays[indexOfDay].addPlace(newAddress, newAddressObj);
       this.setState({days: newDays});
   };
+
+  handleDeleteAttraction = (indexOfDay, addressToDelete) => {
+      let newDays = [...this.state.days];
+      newDays[indexOfDay].deletePlace(addressToDelete);
+      this.setState({days: newDays});
+  };
+
+  handleClearAttraction = (indexOfDay) => {
+    let newDays = [...this.state.days];
+    newDays[indexOfDay].clear();
+    this.setState({days: newDays});
+  };
+
+  getMarkers = () => {
+    return this.state.days.map(day =>  Array.from(day.places.values())).flat(1);
+  };
+
+
   render(){
     return (
         <BrowserRouter>
@@ -66,7 +84,11 @@ class App extends Component{
                   }/>
                 <Route path="/map" element={
                   <MapContainer {...this.state}
-                  newAttraction={this.handleNewAttraction}></MapContainer>
+                  newAttraction={this.handleNewAttraction}
+                  clearAttraction={this.handleClearAttraction}
+                  deleteAttraction={this.handleDeleteAttraction}
+                  getMarkers={this.getMarkers}
+                  ></MapContainer>
                 } />
               </Routes>
           </div>

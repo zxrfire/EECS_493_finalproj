@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from 'react';
 import {VisibilityContext} from 'react-horizontal-scrolling-menu';
-import {Card, ListGroup, Button} from 'react-bootstrap';
+import {Card, ListGroup, Button, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/DayCard.css'
 import '../style/MapContainer.css'
@@ -42,8 +42,21 @@ const DayCard = (props) => {
   };
 
   const renderList = () => {
-    const places_names = day.places
-      .map(name => (<ListGroup.Item>{name}</ListGroup.Item>));
+    console.log("Rendering day's places");
+    console.log(day.places);
+    const places_names =  Array.from(day.places.keys())
+      .map((name, idx) => (
+          <ListGroup.Item>
+            <Row>
+              <Col xs={12} md={11}>
+                {name}
+              </Col>
+              <Col xs={4} md={1}>
+                <Button variant="danger" onClick={handleDelete}>-</Button>
+              </Col>
+
+            </Row>
+          </ListGroup.Item>));
     return (
         <ListGroup variant="flush">
           {places_names}

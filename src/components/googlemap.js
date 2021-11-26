@@ -19,8 +19,6 @@ export class MapContainer extends Component {
     super(props);
     this.state = {
       // for google map places autocomplete
-      // address: '',
-
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
@@ -28,8 +26,6 @@ export class MapContainer extends Component {
         lat: 49.2827291,
         lng: -123.1207375,
       },
-      markers: [],
-      // names: [],
     };
     this.clearMarks = this.clearMarks.bind(this);
     if (props.cities.length !== 0){
@@ -41,7 +37,7 @@ export class MapContainer extends Component {
   updateMap = (newGeoObj) =>
           getLatLng(newGeoObj).then(latLng => {
             console.log('Success', latLng);
-            this.setState({markers: [...this.state.markers, latLng]});
+            // this.setState({markers: [...this.state.markers, latLng]});
             // update center state
             this.setState({mapCenter: latLng});
           }).
@@ -60,7 +56,7 @@ export class MapContainer extends Component {
     const newAttractionGeoObj =  (await this.getLocationObject(address))[0];
     console.log(newAttractionGeoObj);
     await this.updateMap(newAttractionGeoObj);
-    this.props.newAttraction(id, address);
+    this.props.newAttraction(id, address, newAttractionGeoObj);
   };
 
   clearMarks() {
@@ -77,7 +73,6 @@ export class MapContainer extends Component {
   };
 
   render() {
-    let marks = this.state.markers;
     //let data1 = this.state.names;
 
     const shadow = {
@@ -118,12 +113,7 @@ export class MapContainer extends Component {
                         lng: this.state.mapCenter.lng,
                       }}
                   >
-                    {/*<Marker*/}
-                    {/*    position={{*/}
-                    {/*        lat: this.state.mapCenter.lat,*/}
-                    {/*        lng: this.state.mapCenter.lng*/}
-                    {/*    }} />*/}
-                    {marks.map((marker, id) => (
+                    {this.props.getMarkers().map((marker, id) => (
                         <Marker
                             position={{lat: marker.lat, lng: marker.lng}}
                         />

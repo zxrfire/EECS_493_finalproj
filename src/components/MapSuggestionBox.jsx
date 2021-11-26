@@ -23,7 +23,7 @@ const MapSuggestionBox = (props) => {
 
   const renderSuggestions = (getSuggestionItemProps, suggestions) => {
       return (
-          <div className="list-group" style={{"margin-bottom": "1%", width: "100%"}}>
+          <div className="list-group" style={{"margin-bottom": "1%", width: "90%"}}>
             {suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion))}
           </div>
       );
