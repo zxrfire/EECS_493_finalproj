@@ -74,7 +74,7 @@ class Recommendation extends Component {
     render() {
         let table = this.createTable();
         return (
-            <div style={{marginTop: "800px"}}>
+            <div>
                 {table}
             </div>
         );
