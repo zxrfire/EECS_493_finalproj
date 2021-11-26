@@ -22,14 +22,16 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      mapCenter: {
-        lat: 49.2827291,
-        lng: -123.1207375,
-      },
+      mapCenter: {},
     };
     // this.clearMarks = this.clearMarks.bind(this);
-    if (props.cities.length !== 0){
-      this.updateMap(props.cities[0]);
+    if (props.cities.length === 0) {
+      this.state.mapCenter = {
+        lat: 49.2827291,
+        lng: -123.1207375,
+      };
+    } else {
+      getLatLng(props.cities[0]).then(this.updateMap);
     }
   }
   getLocationObject = address => geocodeByAddress(address);
@@ -40,11 +42,6 @@ export class MapContainer extends Component {
             // update center state
             this.setState({mapCenter: latLng});
           };
-
-
-  // handleChange = address => {
-  //   this.setState({address});
-  // };
 
   handleNewAttraction = async (id, address) => {
     console.log(address);
@@ -173,36 +170,6 @@ function RightArrow() {
   );
 }
 
-//
-// function Card({
-//     onClick,
-//     selected,
-//     title,
-//     itemId
-//   }) {
-//     const visibility = React.useContext(VisibilityContext);
-//
-//     return (
-//       <div
-//         onClick={() => onClick(visibility)}
-//         style={{
-//           width: "160px",
-//         }}
-//         tabIndex={0}
-//       >
-//         <div className="card">
-//           <div>{title}</div>
-//           <div>visible: {JSON.stringify(!!visibility.isItemVisible(itemId))}</div>
-//           <div>selected: {JSON.stringify(!!selected)}</div>
-//         </div>
-//         <div
-//           style={{
-//             height: "200px",
-//           }}
-//         />
-//       </div>
-//     );
-//   }
 
 export default GoogleApiWrapper({
   apiKey: (key1),
