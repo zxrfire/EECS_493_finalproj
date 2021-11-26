@@ -10,7 +10,7 @@ import moment from 'moment';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
-  const { day, id, newPlace } = props;
+  const { day, id, newPlace, deletePlace, clearPlaces } = props;
 
   const [address, setAddress] = useState();
 
@@ -32,29 +32,32 @@ const DayCard = (props) => {
     await newPlace(id, address);
   };
 
-  const handleDelete = () => {
-
-  };
-
-  // handle clearing all items
-  const handleClear = () => {
-
-  };
+  // // deleting an certain attraction in the day
+  // const handleDelete = (address) => {
+  //
+  // };
+  //
+  // // handle clearing all items
+  // const handleClear = () => {
+  //
+  // };
 
   const renderList = () => {
     console.log("Rendering day's places");
     console.log(day.places);
     const places_names =  Array.from(day.places.keys())
-      .map((name, idx) => (
-          <ListGroup.Item>
+      .map((name) => (
+          <ListGroup.Item key={`Attraction ${name}`}>
             <Row>
               <Col xs={12} md={11}>
                 {name}
               </Col>
               <Col xs={4} md={1}>
-                <Button variant="danger" onClick={handleDelete}>-</Button>
+                <Button variant="danger btn-sm"
+                        onClick={() => deletePlace(id, name)}>
+                  -
+                </Button>
               </Col>
-
             </Row>
           </ListGroup.Item>));
     return (
@@ -88,7 +91,7 @@ const DayCard = (props) => {
             value={address}
             onChange={handleChange}
             onSelect={handleSelect}/>
-          <Button variant="danger" onClick={handleClear}>Clear</Button>
+          <Button variant="danger" onClick={() => clearPlaces(id)}>Clear</Button>
          </div>
        </div>
       // </React.Fragment>

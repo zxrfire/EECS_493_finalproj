@@ -27,7 +27,7 @@ export class MapContainer extends Component {
         lng: -123.1207375,
       },
     };
-    this.clearMarks = this.clearMarks.bind(this);
+    // this.clearMarks = this.clearMarks.bind(this);
     if (props.cities.length !== 0){
       this.updateMap(props.cities[0]);
     }
@@ -59,15 +59,20 @@ export class MapContainer extends Component {
     this.props.newAttraction(id, address, newAttractionGeoObj);
   };
 
-  clearMarks() {
-    this.setState({
-      markers: [],
-    });
-  }
+  // clearMarks() {
+  //   this.setState({
+  //     markers: [],
+  //   });
+  // }
 
   renderDayCard = (day, id) => {
     return (
-        <DayCard day={day} key={id} id={id} newPlace={this.handleNewAttraction}>
+        <DayCard day={day}
+                 key={id} id={id}
+                 newPlace={this.handleNewAttraction}
+                 deletePlace={this.props.deleteAttraction}
+                 clearPlaces={this.props.clearAttractions}
+        >
         </DayCard>
     );
   };

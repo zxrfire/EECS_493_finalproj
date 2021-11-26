@@ -55,7 +55,7 @@ class App extends Component{
       this.setState({days: newDays});
   };
 
-  handleClearAttraction = (indexOfDay) => {
+  handleClearAttractions = (indexOfDay) => {
     let newDays = [...this.state.days];
     newDays[indexOfDay].clear();
     this.setState({days: newDays});
@@ -85,7 +85,7 @@ class App extends Component{
                 <Route path="/map" element={
                   <MapContainer {...this.state}
                   newAttraction={this.handleNewAttraction}
-                  clearAttraction={this.handleClearAttraction}
+                  clearAttractions={this.handleClearAttractions}
                   deleteAttraction={this.handleDeleteAttraction}
                   getMarkers={this.getMarkers}
                   ></MapContainer>
