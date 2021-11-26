@@ -22,14 +22,12 @@ const StartPage = props => {
                 <Row className={"mt-1"}>
                   <label htmlFor="inputStartDate">Start Date</label>
                   <input type="date" className="form-control" id="inputEmail4"
-                         placeholder="Start Date" onInput={props.newStartDate}
-                      onSet={props.newStartDate}/>
+                         placeholder="Start Date" onInput={props.newStartDate} />
                 </Row>
                 <Row className={"mt-1"}>
                   <label htmlFor="inputStartDate">End Date</label>
                   <input type="date" className="form-control" id="inputPassword4"
-                         placeholder="EndDate" onInput={props.newEndDate}
-                  onSet={props.newEndDate}/>
+                         placeholder="EndDate" onInput={props.newEndDate} />
                 </Row>
                 <Row className={"mt-1"}>
                   <label htmlFor="inputCity">Choose Your City</label>

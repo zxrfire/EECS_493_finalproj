@@ -12,7 +12,7 @@ const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
   const { day, id, newPlace, deletePlace, clearPlaces } = props;
 
-  const [address, setAddress] = useState();
+  const [address, setAddress] = useState("");
 
   const getCardTitle = ()=>{
     // format in english form
@@ -83,7 +83,7 @@ const DayCard = (props) => {
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
          <div className={"card-body"}
-              style={{'min-height': '450px', 'max-height': '500px'}}>
+              style={{'minHeight': '450px', 'max-height': '500px'}}>
            <h5 className="card-title">{getCardTitle()}</h5>
            <h6 className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</h6>
            {renderList()}

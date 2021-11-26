@@ -23,7 +23,7 @@ const MapSuggestionBox = (props) => {
 
   const renderSuggestions = (getSuggestionItemProps, suggestions) => {
       return (
-          <div className="list-group" style={{"margin-bottom": "1%", width: "90%"}}>
+          <div className="list-group" style={{"marginBottom": "1%", width: "90%"}}>
             {suggestions.map(suggestion => renderSuggestion(getSuggestionItemProps, suggestion))}
           </div>
       );
@@ -35,7 +35,7 @@ const MapSuggestionBox = (props) => {
         className: 'location-search-input'});
     inputProps["className"] += "form-control";
     return (
-        <div className="input-group mb-3" style={{"margin-top": "1%"}}>
+        <div className="input-group mb-3" style={{"marginTop": "1%"}}>
           <input {...inputProps} style={{"width": "90%"}} />
         </div>
     );

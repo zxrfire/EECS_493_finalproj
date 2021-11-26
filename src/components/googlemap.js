@@ -34,14 +34,12 @@ export class MapContainer extends Component {
   }
   getLocationObject = address => geocodeByAddress(address);
 
-  updateMap = (newGeoObj) =>
-          getLatLng(newGeoObj).then(latLng => {
+  updateMap = (latLng) => {
             console.log('Success', latLng);
             // this.setState({markers: [...this.state.markers, latLng]});
             // update center state
             this.setState({mapCenter: latLng});
-          }).
-          catch(error => console.error('Error', error));
+          };
 
 
   // handleChange = address => {
@@ -54,9 +52,10 @@ export class MapContainer extends Component {
     // this.setState({names: [...this.state.names, address]});
     // this.updateMap(address);
     const newAttractionGeoObj =  (await this.getLocationObject(address))[0];
+    const newAttractionLatLng = await getLatLng(newAttractionGeoObj);
     console.log(newAttractionGeoObj);
-    await this.updateMap(newAttractionGeoObj);
-    this.props.newAttraction(id, address, newAttractionGeoObj);
+    await this.updateMap(newAttractionLatLng);
+    this.props.newAttraction(id, address, newAttractionGeoObj, newAttractionLatLng);
   };
 
   // clearMarks() {
@@ -64,6 +63,16 @@ export class MapContainer extends Component {
   //     markers: [],
   //   });
   // }
+
+  renderMarkers =  () => {
+    const markerLatLng = this.props.getMarkersLatLng();
+    console.log(markerLatLng);
+    return markerLatLng.map( (marker, id) =>
+        <Marker key={`Marker${id}`}
+          position={{lat: marker.lat, lng: marker.lng}}
+    />
+    );
+  };
 
   renderDayCard = (day, id) => {
     return (
@@ -118,11 +127,12 @@ export class MapContainer extends Component {
                         lng: this.state.mapCenter.lng,
                       }}
                   >
-                    {this.props.getMarkers().map((marker, id) => (
-                        <Marker
-                            position={{lat: marker.lat, lng: marker.lng}}
-                        />
-                    ))}
+                    {this.renderMarkers()}
+                    {/*{this.props.getMarkers().map((marker, id) => (*/}
+                    {/*    <Marker*/}
+                    {/*        position={{lat: marker.lat, lng: marker.lng}}*/}
+                    {/*    />*/}
+                    {/*))}*/}
                   </Map>
               </div>
               <Recommendation 

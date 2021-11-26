@@ -43,9 +43,9 @@ class App extends Component{
       this.setState({days: newDays});
   };
 
-  handleNewAttraction = (indexOfDay, newAddress, newAddressObj) =>{
+  handleNewAttraction = (indexOfDay, newAddress, newGeoObj, newLatLng) =>{
       let newDays = [...this.state.days];
-      newDays[indexOfDay].addPlace(newAddress, newAddressObj);
+      newDays[indexOfDay].addPlace(newAddress, newGeoObj, newLatLng);
       this.setState({days: newDays});
   };
 
@@ -57,12 +57,17 @@ class App extends Component{
 
   handleClearAttractions = (indexOfDay) => {
     let newDays = [...this.state.days];
-    newDays[indexOfDay].clear();
+    newDays[indexOfDay].clearPlaces();
     this.setState({days: newDays});
   };
 
-  getMarkers = () => {
-    return this.state.days.map(day =>  Array.from(day.places.values())).flat(1);
+  getMarkerLatLng = () => {
+    const markers = this.state.days.map(day =>
+        Array.from(day.places.values()).map(place => place.latLng))
+        .flat(1);
+    console.log("Markers");
+    console.log(markers);
+    return markers;
   };
 
 
@@ -87,7 +92,7 @@ class App extends Component{
                   newAttraction={this.handleNewAttraction}
                   clearAttractions={this.handleClearAttractions}
                   deleteAttraction={this.handleDeleteAttraction}
-                  getMarkers={this.getMarkers}
+                  getMarkersLatLng={this.getMarkerLatLng}
                   ></MapContainer>
                 } />
               </Routes>
