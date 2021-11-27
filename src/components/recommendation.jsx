@@ -13,16 +13,16 @@ class Recommendation extends Component {
         super(props);
         this.state = {
             attractions: [],
-            mapCenter: {
-                lat: -91,
-                lng: -181,
-            },
+            // mapCenter: {
+            //     lat: -91,
+            //     lng: -181,
+            // },
         };
         this.createTable = this.createTable.bind(this);
         this.determineCoordinates(this.props.cityObj);
     }
 
-    getLocationObject = address => geocodeByAddress(address);
+    // getLocationObject = address => geocodeByAddress(address);
 
     determineCoordinates(newGeoObj) {
         getLatLng(newGeoObj)
@@ -50,7 +50,6 @@ class Recommendation extends Component {
             });
         })
         .catch(error => console.error('Error', error));
-        
     }
 
     createTable() {

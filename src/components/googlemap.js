@@ -73,7 +73,7 @@ export default class MapContainer extends Component {
   renderDayCard = (day, id) => {
     return (
         <DayCard day={day}
-                 key={id} id={id}
+                 key={id} dayID={id}
                  newPlace={this.handleNewAttraction}
                  deletePlace={this.props.deleteAttraction}
                  clearPlaces={this.props.clearAttractions}
@@ -111,6 +111,7 @@ export default class MapContainer extends Component {
               </Col>
               <Col xs={6} md={4}>
                 <Recommendation
+                    mapCenter={this.state.mapCenter}
                     cityObj={this.props.cities[0]}
                 >
               </Recommendation>

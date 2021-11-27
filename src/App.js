@@ -17,7 +17,7 @@ class App extends Component{
         startDate: null,
         endDate: null,
         cities: [],
-        days: []
+        days: [],
     }
   };
   handleNewStartDate = (event) => {
@@ -49,9 +49,9 @@ class App extends Component{
       this.setState({days: newDays});
   };
 
-  handleDeleteAttraction = (indexOfDay, addressToDelete) => {
+  handleDeleteAttraction = (indexOfDay, placeIndex) => {
       let newDays = [...this.state.days];
-      newDays[indexOfDay].deletePlace(addressToDelete);
+      newDays[indexOfDay].deletePlace(placeIndex);
       this.setState({days: newDays});
   };
 
@@ -62,9 +62,9 @@ class App extends Component{
   };
 
   getMarkerLatLng = () => {
-    const markers = this.state.days.map(day =>
-        Array.from(day.places.values()).map(place => place.latLng))
-        .flat(1);
+    const markers = this.state.days.map(
+        day => day.places.map(place => place.latLng)
+    ).flat(1);
     console.log("Markers");
     console.log(markers);
     return markers;
