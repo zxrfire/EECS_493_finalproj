@@ -18,6 +18,7 @@ class App extends Component{
         endDate: null,
         cities: [],
         days: [],
+        recommendations: []
     }
   };
   handleNewStartDate = (event) => {
@@ -61,7 +62,13 @@ class App extends Component{
     this.setState({days: newDays});
   };
 
+  handleNewRecommendation = (newRecommendations) => {
+    this.setState({recommendations: newRecommendations});
+  };
+
+
   getMarkerLatLng = () => {
+
     const markers = this.state.days.map(
         day => day.places.map(place => place.latLng)
     ).flat(1);
@@ -90,6 +97,7 @@ class App extends Component{
                 <Route path="/map" element={
                   <MapContainer {...this.state}
                   newAttraction={this.handleNewAttraction}
+                  newRecommendations={this.handleNewRecommendation}
                   clearAttractions={this.handleClearAttractions}
                   deleteAttraction={this.handleDeleteAttraction}
                   getMarkersLatLng={this.getMarkerLatLng}
