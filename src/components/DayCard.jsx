@@ -10,7 +10,7 @@ import moment from 'moment';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
-  const { day, id, newPlace, deletePlace, clearPlaces } = props;
+  const { day, id, newPlace, deletePlace, clearPlaces, getMarkersLatLng } = props;
 
   const [address, setAddress] = useState("");
 
@@ -92,6 +92,7 @@ const DayCard = (props) => {
             onChange={handleChange}
             onSelect={handleSelect}/>
           <Button variant="danger" onClick={() => clearPlaces(id)}>Clear</Button>
+           <Button variant="secondary" onClick={() => getMarkersLatLng(id)}>Show Attractions on this day</Button>
          </div>
        </div>
       // </React.Fragment>

@@ -17,7 +17,8 @@ class App extends Component{
         startDate: null,
         endDate: null,
         cities: [],
-        days: []
+        days: [],
+        currentdays: [],
     }
   };
   handleNewStartDate = (event) => {
@@ -60,14 +61,26 @@ class App extends Component{
     newDays[indexOfDay].clearPlaces();
     this.setState({days: newDays});
   };
+  //
+  // showMarkersByDay = (indexOfDay) =>{
+  //     this.setState({days: })
+  //     const markers = this.state.days.map(day =>
+  //         Array.from(day[indexOfDay].places.values()).map(place => place.latLng))
+  //         .flat(1);
+  //     console.log("Markers");
+  //     console.log(markers);
+  //     return markers;
+  // }
 
-  getMarkerLatLng = () => {
-    const markers = this.state.days.map(day =>
-        Array.from(day.places.values()).map(place => place.latLng))
-        .flat(1);
-    console.log("Markers");
-    console.log(markers);
-    return markers;
+  getMarkerLatLng = (index = -1) => {
+    if (index === -1){
+        const markers = this.state.days.map(day =>
+            Array.from(day.places.values()).map(place => place.latLng))
+            .flat(1);
+        console.log("Markers");
+        console.log(markers);
+        return markers;
+    }
   };
 
 
@@ -93,6 +106,7 @@ class App extends Component{
                   clearAttractions={this.handleClearAttractions}
                   deleteAttraction={this.handleDeleteAttraction}
                   getMarkersLatLng={this.getMarkerLatLng}
+                  // showMarkersByDay={this.showMarkersByDay}
                   ></MapContainer>
                 } />
               </Routes>

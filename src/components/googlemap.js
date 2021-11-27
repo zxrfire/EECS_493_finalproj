@@ -77,6 +77,8 @@ export default class MapContainer extends Component {
                  newPlace={this.handleNewAttraction}
                  deletePlace={this.props.deleteAttraction}
                  clearPlaces={this.props.clearAttractions}
+                 getMarkersLatLng={this.props.getMarkersLatLng}
+            // showMarkersByDay={this.props.showMarkersByDay}
         >
         </DayCard>
     );
