@@ -39,9 +39,15 @@ class App extends Component{
       for (let m = moment(this.state.startDate);
         m.diff(this.state.endDate, 'days') <= 0; m.add(1, 'days')) {
         console.log(m.format('YYYY-MM-DD'));
-        newDays.push(new Day(m.format('YYYY-MM-DD')));
+        newDays.push(new Day(m.format('YYYY-MM-DD')))
+
       }
       this.setState({days: newDays});
+      let newday = []
+      this.state.days.forEach((ele, index) => {
+          newday.push(index)
+      })
+      this.setState({currentdays: newday})
   };
 
   handleNewAttraction = (indexOfDay, newAddress, newGeoObj, newLatLng) =>{
@@ -50,9 +56,9 @@ class App extends Component{
       this.setState({days: newDays});
   };
 
-  handleDeleteAttraction = (indexOfDay, addressToDelete) => {
+  handleDeleteAttraction = (indexOfDay, placeIndex) => {
       let newDays = [...this.state.days];
-      newDays[indexOfDay].deletePlace(addressToDelete);
+      newDays[indexOfDay].deletePlace(placeIndex);
       this.setState({days: newDays});
   };
 
@@ -61,26 +67,24 @@ class App extends Component{
     newDays[indexOfDay].clearPlaces();
     this.setState({days: newDays});
   };
-  //
-  // showMarkersByDay = (indexOfDay) =>{
-  //     this.setState({days: })
-  //     const markers = this.state.days.map(day =>
-  //         Array.from(day[indexOfDay].places.values()).map(place => place.latLng))
-  //         .flat(1);
-  //     console.log("Markers");
-  //     console.log(markers);
-  //     return markers;
-  // }
 
-  getMarkerLatLng = (index = -1) => {
-    if (index === -1){
-        const markers = this.state.days.map(day =>
-            Array.from(day.places.values()).map(place => place.latLng))
-            .flat(1);
-        console.log("Markers");
-        console.log(markers);
-        return markers;
-    }
+  showMarkersByDay = (indexOfDay) =>{
+      if (this.state.days.length === this.state.currentdays.length){
+          this.setState({currentdays: [indexOfDay]})
+      }
+      else{
+          this.setState({currentdays: [[...this.state.currentdays]]})
+      }
+  }
+  getMarkerLatLng = () => {
+      let currdays = []
+      this.state.currentdays.forEach(index => currdays.push(this.state.days[index]))
+    const markers = currdays.map(
+        day => day.places.map(place => place.latLng)
+    ).flat(1);
+    console.log("Markers");
+    console.log(markers);
+    return markers;
   };
 
 
@@ -106,7 +110,7 @@ class App extends Component{
                   clearAttractions={this.handleClearAttractions}
                   deleteAttraction={this.handleDeleteAttraction}
                   getMarkersLatLng={this.getMarkerLatLng}
-                  // showMarkersByDay={this.showMarkersByDay}
+                  showMarkersByDay={this.showMarkersByDay}
                   ></MapContainer>
                 } />
               </Routes>

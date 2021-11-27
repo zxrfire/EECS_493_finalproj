@@ -3,24 +3,26 @@ import moment from 'moment';
 class Day{
   constructor(date) {
     this.date = moment(date);
-    this.places = new Map(); // a list of location objects
+    // key: address
+    this.places = []; // a list of location objects
   }
 
   clearPlaces() {
-    this.places.clear();
+    this.places = [];
   }
 
   addPlace(newAddress, newGeoObj, newLatLng){
-    this.places.set(newAddress, new Place(newGeoObj, newLatLng));
+    this.places.push(new Place(newAddress, newGeoObj, newLatLng));
   }
 
-  deletePlace(address){
-    this.places.delete(address);
+  deletePlace(addressIdx){
+    this.places.splice(addressIdx, 1);
   }
 }
 
 class Place{
-  constructor(geoObj, latLng) {
+  constructor(newAddress, geoObj, latLng) {
+    this.address = newAddress;
     this.plannedTime = null;
     this.geoObj = geoObj;
     this.latLng = latLng;
