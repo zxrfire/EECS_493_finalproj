@@ -69,25 +69,33 @@ class App extends Component{
     this.setState({days: newDays});
   };
 
-  showMarkersByDay = (indexOfDay) =>{
-      if (this.state.days.length === this.state.currentdays.length){
-          this.setState({currentdays: [indexOfDay]})
-      }
-      else{
-          // this.setState({currentdays: [[...this.state.currentdays]]})
-          this.setState({currentdays: [indexOfDay]})
-      }
-  }
+  handleToggleDisplayMarkers = (indexOfDay) => {
+    let newDays = [...this.state.days];
+    newDays[indexOfDay].toggleDisplayMarkers();
+    this.setState({days: newDays});
+  };
+  //
+  // showMarkersByDay = (indexOfDay) =>{
+  //     if (this.state.days.length === this.state.currentdays.length){
+  //         this.setState({currentdays: [indexOfDay]})
+  //     }
+  //     else{
+  //         // this.setState({currentdays: [[...this.state.currentdays]]})
+  //         this.setState({currentdays: [indexOfDay]})
+  //     }
+  // };
+
   getMarkerLatLng = () => {
-      let currdays = []
-      this.state.currentdays.forEach(index => currdays.push(this.state.days[index]))
-      const markers = currdays.map(
+      // let currdays = [];
+      // this.state.currentdays.forEach(index => currdays.push(this.state.days[index]));
+      const markers = this.state.days.filter(day => day.displayMarkers).map(
           day => day.places.map(place => place.latLng)
       ).flat(1);
       console.log("Markers");
       console.log(markers);
       return markers;
   };
+
   handleNewRecommendation = (newRecommendations) => {
     this.setState({recommendations: newRecommendations});
   };
@@ -113,6 +121,7 @@ class App extends Component{
                   <MapContainer {...this.state}
                   newAttraction={this.handleNewAttraction}
                   newRecommendations={this.handleNewRecommendation}
+                  toggleDisplayMarkers={this.handleToggleDisplayMarkers}
                   clearAttractions={this.handleClearAttractions}
                   deleteAttraction={this.handleDeleteAttraction}
                   getMarkersLatLng={this.getMarkerLatLng}

@@ -10,7 +10,7 @@ import moment from 'moment';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
-  const { day, dayID, newPlace, deletePlace, clearPlaces, showMarkersByDay } = props;
+  const { day, dayID, newPlace, deletePlace, clearPlaces, toggleMarkers } = props;
 
   const [address, setAddress] = useState("");
 
@@ -86,13 +86,21 @@ const DayCard = (props) => {
               style={{'minHeight': '450px', 'max-height': '500px'}}>
            <h5 className="card-title">{getCardTitle()}</h5>
            <h6 className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</h6>
+           <div className={"form-check"}>
+             <input className={"form-check-input"} type="checkbox" value=""
+                    id={`Check${dayID}`} checked={day.displayMarkers}
+                    onChange={() => toggleMarkers(dayID)}/>
+               <label className={"form-check-label"} htmlFor={`Check${dayID}`}>
+                 Display Markers
+               </label>
+           </div>
            {renderList()}
            <MapSuggestionBox
             value={address}
             onChange={handleChange}
             onSelect={handleSelect}/>
           <Button variant="danger" onClick={() => clearPlaces(dayID)}>Clear</Button>
-           <Button variant="secondary" onClick={() => showMarkersByDay(dayID)}>Show Attractions on this day</Button>
+           {/*<Button variant="secondary" onClick={() => showMarkersByDay(dayID)}>Show Attractions on this day</Button>*/}
          </div>
        </div>
       // </React.Fragment>

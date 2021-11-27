@@ -68,8 +68,7 @@ class Recommendation extends Component {
         const {recommendations} = this.props;
         let table = 
             <table style={{width:'100%'}}>
-                <caption style={{captionSide: "top"}}>Recommended Attractions for
-                    {this.props.cityObj.formatted_address}</caption>
+                <caption style={{captionSide: "top"}}>Recommended Attractions for {this.props.cityObj.formatted_address}</caption>
                 <tr>
                     <th>#</th>
                     <th>Attraction</th>

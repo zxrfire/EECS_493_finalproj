@@ -5,6 +5,11 @@ class Day{
     this.date = moment(date);
     // key: address
     this.places = []; // a list of location objects
+    this.displayMarkers = true;
+  }
+
+  toggleDisplayMarkers(){
+    this.displayMarkers = !this.displayMarkers;
   }
 
   clearPlaces() {
