@@ -113,6 +113,8 @@ export default class MapContainer extends Component {
               </Col>
               <Col xs={6} md={4}>
                 <Recommendation
+                    recommendations={this.props.recommendations}
+                    newRecommendations={this.props.newRecommendations}
                     mapCenter={this.state.mapCenter}
                     cityObj={this.props.cities[0]}
                 >

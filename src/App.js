@@ -19,6 +19,7 @@ class App extends Component{
         cities: [],
         days: [],
         currentdays: [],
+        recommendations: []
     }
   };
   handleNewStartDate = (event) => {
@@ -44,7 +45,7 @@ class App extends Component{
       }
       this.setState({days: newDays});
       let newday = []
-      this.state.days.forEach((ele, index) => {
+      newDays.forEach((ele, index) => {
           newday.push(index)
       })
       this.setState({currentdays: newday})
@@ -73,18 +74,22 @@ class App extends Component{
           this.setState({currentdays: [indexOfDay]})
       }
       else{
-          this.setState({currentdays: [[...this.state.currentdays]]})
+          // this.setState({currentdays: [[...this.state.currentdays]]})
+          this.setState({currentdays: [indexOfDay]})
       }
   }
   getMarkerLatLng = () => {
       let currdays = []
       this.state.currentdays.forEach(index => currdays.push(this.state.days[index]))
-    const markers = currdays.map(
-        day => day.places.map(place => place.latLng)
-    ).flat(1);
-    console.log("Markers");
-    console.log(markers);
-    return markers;
+      const markers = currdays.map(
+          day => day.places.map(place => place.latLng)
+      ).flat(1);
+      console.log("Markers");
+      console.log(markers);
+      return markers;
+  };
+  handleNewRecommendation = (newRecommendations) => {
+    this.setState({recommendations: newRecommendations});
   };
 
 
@@ -107,6 +112,7 @@ class App extends Component{
                 <Route path="/map" element={
                   <MapContainer {...this.state}
                   newAttraction={this.handleNewAttraction}
+                  newRecommendations={this.handleNewRecommendation}
                   clearAttractions={this.handleClearAttractions}
                   deleteAttraction={this.handleDeleteAttraction}
                   getMarkersLatLng={this.getMarkerLatLng}
