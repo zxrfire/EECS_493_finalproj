@@ -36,7 +36,7 @@ const MapSuggestionBox = (props) => {
     inputProps["className"] += "form-control";
     return (
         <div className="input-group mb-3" style={{"marginTop": "1%"}}>
-          <input {...inputProps} style={{"width": "90%"}} />
+          <input {...inputProps} style={{"width": "100%"}} />
         </div>
     );
   };
