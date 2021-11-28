@@ -45,7 +45,7 @@ const DayCard = (props) => {
   // };
 
   /*function sortByTime(a, b) {
-    return 
+    return
   }*/
 
   const renderList = () => {
@@ -67,7 +67,7 @@ const DayCard = (props) => {
               <Col xs={12} md={11}>
                 <InputGroup>
                   <InputGroup.Text>Time</InputGroup.Text>
-                  <TimePickerComponent 
+                  <TimePickerComponent
                     setAttractionTime={setAttractionTime}
                     dayID={dayID}
                     placeIndex={placeIndex}
@@ -96,7 +96,7 @@ const DayCard = (props) => {
       //       <a href="#" className="card-link">Another link</a>
       //     </div>
       //   </div>
-       <div className={"card day_card shadow p-3 mb-5 bg-white rounded"}
+       <div className={"card day_card shadow-sm p-3 mb-5 bg-white rounded"}
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
          <div className={"card-body"}
