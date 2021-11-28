@@ -1,16 +1,18 @@
 import React, {Fragment, useState} from 'react';
 import {VisibilityContext} from 'react-horizontal-scrolling-menu';
-import {Card, ListGroup, Button, Row, Col} from 'react-bootstrap';
+import {Card, ListGroup, Button, Row, Col, InputGroup, FormControl} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/DayCard.css'
 import '../style/MapContainer.css'
 import MapSuggestionBox from './MapSuggestionBox';
 import moment from 'moment';
+import TimePicker from 'react-time-picker';
+import TimePickerComponent from './timepicker';
 
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
-  const { day, dayID, newPlace, deletePlace, clearPlaces, toggleMarkers } = props;
+  const { day, dayID, newPlace, deletePlace, clearPlaces, toggleMarkers, setAttractionTime } = props;
 
   const [address, setAddress] = useState("");
 
@@ -42,6 +44,10 @@ const DayCard = (props) => {
   //
   // };
 
+  /*function sortByTime(a, b) {
+    return 
+  }*/
+
   const renderList = () => {
     console.log("Rendering day's places");
     console.log(day.places);
@@ -49,17 +55,28 @@ const DayCard = (props) => {
       .map((place, placeIndex) => (
           <ListGroup.Item key={`Attraction ${place.address}`}>
             <Row>
-              <Col xs={12} md={11}>
-                {place.address}
-              </Col>
               <Col xs={2} md={1}>
                 <Button variant="danger btn-sm"
                         onClick={() => deletePlace(dayID, placeIndex)}>
-                  -
+                  X
                 </Button>
+              </Col>
+              <Col xs={12} md={11}>
+                {place.address}
+              </Col>
+              <Col xs={12} md={11}>
+                <InputGroup>
+                  <InputGroup.Text>Time</InputGroup.Text>
+                  <TimePickerComponent 
+                    setAttractionTime={setAttractionTime}
+                    dayID={dayID}
+                    placeIndex={placeIndex}
+                  />
+                </InputGroup>
               </Col>
             </Row>
           </ListGroup.Item>));
+          //.sort(sortByTime);
     return (
         <ListGroup variant="flush">
           {places_names}

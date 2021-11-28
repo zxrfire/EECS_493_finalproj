@@ -73,13 +73,15 @@ export default class MapContainer extends Component {
   renderDayCard = (day, id) => {
     return (
         <DayCard day={day}
-                 key={id} dayID={id}
-                 newPlace={this.handleNewAttraction}
-                 deletePlace={this.props.deleteAttraction}
-                 clearPlaces={this.props.clearAttractions}
-                 getMarkersLatLng={this.props.getMarkersLatLng}
-                 // showMarkersByDay={this.props.showMarkersByDay}
-                 toggleMarkers={this.props.toggleDisplayMarkers}
+          key={id} dayID={id}
+          newPlace={this.handleNewAttraction}
+          deletePlace={this.props.deleteAttraction}
+          clearPlaces={this.props.clearAttractions}
+          getMarkersLatLng={this.props.getMarkersLatLng}
+          // showMarkersByDay={this.props.showMarkersByDay}
+          toggleMarkers={this.props.toggleDisplayMarkers}
+          setAttractionTime={this.props.setAttractionTime}
+          //sortAttractions={this.props.sortAttractions}
         >
         </DayCard>
     );

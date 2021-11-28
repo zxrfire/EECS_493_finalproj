@@ -31,7 +31,7 @@ const MapSuggestionBox = (props) => {
 
   const renderInput = (getInputProps) => {
     let inputProps = getInputProps({
-        placeholder: 'Search for Attractions to Add To Your Iternary',
+        placeholder: 'Search for Attractions to Add To Your Itinerary',
         className: 'location-search-input'});
     inputProps["className"] += "form-control";
     return (
