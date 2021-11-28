@@ -2,6 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {VisibilityContext} from 'react-horizontal-scrolling-menu';
 import {Card, ListGroup, Button, Row, Col, InputGroup, FormControl, Stack} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'open-iconic/font/css/open-iconic-bootstrap.css';
 import '../style/DayCard.css'
 import '../style/MapContainer.css'
 import MapSuggestionBox from './MapSuggestionBox';
@@ -37,8 +38,8 @@ const DayCard = (props) => {
     console.log(day.places);
     const places_names =  day.places
       .map((place, placeIndex) => (
-        <div className={"card shadow-sm p-3 mb-1 bg-body rounded"}>
-          <div className={"d-flex justify-content-between align-items-center"}>
+        <div className={"card shadow-sm p-3 mb-1 bg-body rounded no-gutters"} style={{"padding": 0}}>
+          <div className={"d-flex justify-content-between align-items-center "}>
         {/*<Stack direction="horizontal" gap={3}>*/}
               <div className={"col-xs-2 align-middle"}>
           {/*<div style={{"width": "40%"}}>*/}
@@ -59,7 +60,7 @@ const DayCard = (props) => {
 
                 <Button variant="danger btn-sm"
                         onClick={() => deletePlace(dayID, placeIndex)}>
-                  <span aria-hidden="true">-</span>
+                  <span className="oi oi-delete"></span>
                 </Button>
                 {/*</div>*/}
               </div>
@@ -78,19 +79,21 @@ const DayCard = (props) => {
        >
          <div className={"card-body"}
               style={{'minHeight': '450px', 'max-height': '500px'}}>
-           <Row>
+           <Row className={"mb-2"}>
              <Col xs={12} md={10}>
                <h5 className="card-title">{getCardTitle()}</h5>
              <h6 className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</h6>
              </Col>
-             <Col xs={6} md={2}>
+             <Col xs={6} md={2} >
                <div className={"form-check  form-switch form-switch-lg"}>
                  <input className={"form-check-input"} type="checkbox" value=""
                         id={`Check${dayID}`} checked={day.displayMarkers}
                         onChange={() => toggleMarkers(dayID)}/>
 
                </div>
-               <Button variant="danger" size="sm" onClick={() => clearPlaces(dayID)}>Clear</Button>
+               <Button variant="danger" size="sm" onClick={() => clearPlaces(dayID)}>
+                 <span className={"oi oi-trash"}></span>
+               </Button>
              </Col>
            </Row>
 
