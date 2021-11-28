@@ -1,13 +1,11 @@
-import React, {Fragment, useState} from 'react';
-import {VisibilityContext} from 'react-horizontal-scrolling-menu';
-import {Card, ListGroup, Button, Row, Col, InputGroup, FormControl, Stack} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Button, Col, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'open-iconic/font/css/open-iconic-bootstrap.css';
-import '../style/DayCard.css'
-import '../style/MapContainer.css'
+import '../style/DayCard.css';
+import '../style/MapContainer.css';
 import MapSuggestionBox from './MapSuggestionBox';
-import TimePickerComponent from './timepicker';
-
+import ItineraryPlace from './ItineraryPlace';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
@@ -36,42 +34,15 @@ const DayCard = (props) => {
   const renderList = () => {
     console.log("Rendering day's places");
     console.log(day.places);
-    const places_names =  day.places
-      .map((place, placeIndex) => (
-        <div className={"card shadow-sm p-3 mb-1 bg-body rounded no-gutters"} style={{"padding": "0!important"}}>
-          <div className={"d-flex justify-content-between align-items-center "}>
-        {/*<Stack direction="horizontal" gap={3}>*/}
-              <div className={"col-xs-2 align-middle"}>
-          {/*<div style={{"width": "40%"}}>*/}
-                  <TimePickerComponent
-                    setAttractionTime={setAttractionTime}
-                    displayTime={place.plannedTime}
-                    dayID={dayID}
-                    placeIndex={placeIndex}
-                  />
-          {/*</div>*/}
-              </div>
-              <div className={"col-xs-7 align-middle"}>
-                <div className={"px-3"}>
-                   {place.address}
-                </div>
-              </div>
-              <div className={"col-xs-2 align-middle"}>
-              {/*  <div className={"float-end"}>*/}
-
-                <Button variant="danger btn-sm"
-                        onClick={() => deletePlace(dayID, placeIndex)}>
-                  <span className="oi oi-delete"></span>
-                </Button>
-                {/*</div>*/}
-              </div>
-            {/*</Stack>*/}
-          </div>
-        </div>
+    return day.places.map((place, placeIndex) => (
+        <ItineraryPlace
+            dayID={dayID}
+            place={place}
+            placeIndex={placeIndex}
+            setAttractionTime={setAttractionTime}
+            deletePlace={deletePlace}
+        ></ItineraryPlace>
     ));
-    return places_names;
-        // <ListGroup variant="flush">
-        // </ListGroup>
   };
 
   return (

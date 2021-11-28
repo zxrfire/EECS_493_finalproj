@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import TimePicker from 'rc-time-picker';
-import ReactDOM from 'react-dom';
 import 'rc-time-picker/assets/index.css';
 import moment from 'moment';
 
-const showSecond = true;
-const str = showSecond ? 'HH:mm:ss' : 'HH:mm';
+// const showSecond = true;
+// const str = showSecond ? 'HH:mm:ss' : 'HH:mm';
 
 /*function TimePickerComponent() {
     const [value, onChange] = useState('10:00');
@@ -31,14 +30,6 @@ class TimePickerComponent extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
     handleChange = time => {
-        // this.setState({
-        //     value: time
-        // }, () => {
-        //     if (this.props.setAttractionTime) {
-        //         this.props.setAttractionTime(this.props.dayID, this.props.placeIndex, time);
-        //     }
-        // });
-        console.log(time);
         if (this.props.setAttractionTime) {
             this.props.setAttractionTime(this.props.dayID, this.props.placeIndex, time);
         }
