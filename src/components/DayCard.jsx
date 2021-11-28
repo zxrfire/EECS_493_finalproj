@@ -38,13 +38,14 @@ const DayCard = (props) => {
     console.log(day.places);
     const places_names =  day.places
       .map((place, placeIndex) => (
-        <div className={"card shadow-sm p-3 mb-1 bg-body rounded no-gutters"} style={{"padding": 0}}>
+        <div className={"card shadow-sm p-3 mb-1 bg-body rounded no-gutters"} style={{"padding": "0!important"}}>
           <div className={"d-flex justify-content-between align-items-center "}>
         {/*<Stack direction="horizontal" gap={3}>*/}
               <div className={"col-xs-2 align-middle"}>
           {/*<div style={{"width": "40%"}}>*/}
                   <TimePickerComponent
                     setAttractionTime={setAttractionTime}
+                    displayTime={place.plannedTime}
                     dayID={dayID}
                     placeIndex={placeIndex}
                   />

@@ -34,15 +34,28 @@ class Day{
     this.places.sort(this.sortByTime);
   }
 
-  sortByTime(a, b) {
-    return a.plannedTime < b.plannedTime ? -1 : (a.plannedTime > b.plannedTime ? 1 : 0);
+  sortByTime(place1, place2) {
+    const a = place1.plannedTime;
+    const b = place2.plannedTime;
+    if (a === null || b == null){
+      if (a == null && b == null){
+        return 0;
+      }
+      if (a == null){
+        return 1; // put null last. put b before a
+      }
+      // b == null
+      return -1; // put a before b
+    }
+    return a.valueOf() - b.valueOf();
+    // return a.plannedTime < b.plannedTime ? -1 : (a.plannedTime > b.plannedTime ? 1 : 0);/**/
   }
 }
 
 class Place{
   constructor(newAddress, geoObj, latLng) {
     this.address = newAddress;
-    this.plannedTime = '23:59';
+    this.plannedTime = null;
     this.geoObj = geoObj;
     this.latLng = latLng;
   }

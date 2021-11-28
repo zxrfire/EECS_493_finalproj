@@ -43,6 +43,15 @@ class TimePickerComponent extends Component {
             this.props.setAttractionTime(this.props.dayID, this.props.placeIndex, time);
         }
     };
+
+    displayingTime = () => {
+        if (this.props.displayTime != null){
+            return this.props.displayTime;
+        }
+        return null;
+    };
+
+
     render() {
         // const time = this.state.value;
         return (
@@ -51,7 +60,7 @@ class TimePickerComponent extends Component {
             <TimePicker
                 style={{ padding: "0"}}
                 showSecond={false}
-                defaultValue={moment()}
+                value={this.displayingTime()}
                 className="xxx"
                 clearIcon={null}
                 allowEmpty={false}
