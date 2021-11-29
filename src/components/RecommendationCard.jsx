@@ -1,7 +1,8 @@
 import React, {Fragment} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useDrag} from 'react-dnd';
-import {Accordion, Row} from 'react-bootstrap';
+import {Accordion, Row, Col} from 'react-bootstrap';
+import 'open-iconic/font/css/open-iconic-bootstrap.css';
 
 const RecommendationCard = props =>{
 
@@ -26,6 +27,8 @@ const RecommendationCard = props =>{
           </Accordion.Header>
           <Accordion.Body>
             <Row>
+              <Col xs={3}><span className="oi oi-home"></span></Col>
+              <Col xs={9}></Col>
               <h7>{attraction.formatted_address}</h7>
             </Row>
           </Accordion.Body>
