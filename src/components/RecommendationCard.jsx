@@ -21,7 +21,9 @@ const RecommendationCard = props =>{
 
 
   const handleCollapse = () => {
-    setURL(attraction.photos[0].getUrl());
+    if (attraction.photos){
+      setURL(attraction.photos[0].getUrl());
+    }
   };
 
   const renderImage = () => {
@@ -43,7 +45,7 @@ const RecommendationCard = props =>{
           </Accordion.Header>
           <Accordion.Body>
             {url !== "" && renderImage()}
-            <Row>
+            <Row className={"mt-1"}>
               <Col xs={1} className={"d-flex align-items-center justify-content-center"}><span className="align-middle oi oi-home"></span></Col>
               <Col xs={11}><h7>{attraction.formatted_address}</h7></Col>
             </Row>
