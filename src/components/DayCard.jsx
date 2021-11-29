@@ -46,7 +46,7 @@ const DayCard = (props) => {
   };
 
   return (
-       <div className={"card day_card shadow p-1 mb-2 bg-white rounded"}
+       <div className={"card day_card shadow-sm p-1 mb-2 bg-white rounded"}
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
          <div className={"card-body"}
