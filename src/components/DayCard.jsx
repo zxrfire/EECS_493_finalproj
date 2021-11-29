@@ -1,14 +1,11 @@
-import React, {Fragment, useState} from 'react';
-import {VisibilityContext} from 'react-horizontal-scrolling-menu';
-import {Card, ListGroup, Button, Row, Col, InputGroup, FormControl} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Button, Col, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../style/DayCard.css'
-import '../style/MapContainer.css'
+import 'open-iconic/font/css/open-iconic-bootstrap.css';
+import '../style/DayCard.css';
+import '../style/MapContainer.css';
 import MapSuggestionBox from './MapSuggestionBox';
-import moment from 'moment';
-import TimePicker from 'react-time-picker';
-import TimePickerComponent from './timepicker';
-
+import ItineraryPlaceCard from './ItineraryPlaceCard';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
@@ -34,89 +31,51 @@ const DayCard = (props) => {
     await newPlace(dayID, address);
   };
 
-  // // deleting an certain attraction in the day
-  // const handleDelete = (address) => {
-  //
-  // };
-  //
-  // // handle clearing all items
-  // const handleClear = () => {
-  //
-  // };
-
-  /*function sortByTime(a, b) {
-    return
-  }*/
-
   const renderList = () => {
-    console.log("Rendering day's places");
-    console.log(day.places);
-    const places_names =  day.places
-      .map((place, placeIndex) => (
-          <ListGroup.Item key={`Attraction ${place.address}`}>
-            <Row>
-              <Col xs={2} md={1}>
-                <Button variant="danger btn-sm"
-                        onClick={() => deletePlace(dayID, placeIndex)}>
-                  X
-                </Button>
-              </Col>
-              <Col xs={12} md={11}>
-                {place.address}
-              </Col>
-              <Col xs={12} md={11}>
-                <InputGroup>
-                  <InputGroup.Text>Time</InputGroup.Text>
-                  <TimePickerComponent
-                    setAttractionTime={setAttractionTime}
-                    dayID={dayID}
-                    placeIndex={placeIndex}
-                  />
-                </InputGroup>
-              </Col>
-            </Row>
-          </ListGroup.Item>));
-          //.sort(sortByTime);
-    return (
-        <ListGroup variant="flush">
-          {places_names}
-        </ListGroup>
-    );
+    // console.log("Rendering day's places");
+    // console.log(day.places);
+    return day.places.map((place, placeIndex) => (
+        <ItineraryPlaceCard
+            dayID={dayID}
+            place={place}
+            placeIndex={placeIndex}
+            setAttractionTime={setAttractionTime}
+            deletePlace={deletePlace}
+        ></ItineraryPlaceCard>
+    ));
   };
 
   return (
-      // <React.Fragment>
-      //   <div className="card" style="width: 18rem;">
-      //     <div className="card-body">
-      //       <h5 className="card-title">Card title</h5>
-      //       <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-      //       <p className="card-text">Some quick example text to build on the
-      //         card title and make up the bulk of the card's content.</p>
-      //       <a href="#" className="card-link">Card link</a>
-      //       <a href="#" className="card-link">Another link</a>
-      //     </div>
-      //   </div>
-       <div className={"card day_card shadow-sm p-3 mb-5 bg-white rounded"}
+       <div className={"card day_card shadow-sm p-1 mb-2 bg-white rounded"}
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
          <div className={"card-body"}
-              style={{'minHeight': '450px', 'max-height': '500px'}}>
-           <h5 className="card-title">{getCardTitle()}</h5>
-           <h6 className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</h6>
-           <div className={"form-check"}>
-             <input className={"form-check-input"} type="checkbox" value=""
-                    id={`Check${dayID}`} checked={day.displayMarkers}
-                    onChange={() => toggleMarkers(dayID)}/>
-               <label className={"form-check-label"} htmlFor={`Check${dayID}`}>
-                 Display Markers
-               </label>
-           </div>
+              style={{'minHeight': '150px'}}>
+           <Row className={"mb-2"}>
+             <Col xs={12} md={10}>
+               <h5 className="card-title">{getCardTitle()}</h5>
+             <h6 className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</h6>
+             </Col>
+             <Col xs={6} md={2} >
+               <div className={"form-check  form-switch form-switch-lg"}>
+                 <input className={"form-check-input"} type="checkbox" value=""
+                        id={`Check${dayID}`} checked={day.displayMarkers}
+                        onChange={() => toggleMarkers(dayID)}/>
+
+               </div>
+               <Button variant="danger" size="sm" onClick={() => clearPlaces(dayID)}>
+                 <span className={"oi oi-trash"}></span>
+               </Button>
+             </Col>
+           </Row>
+
+
            {renderList()}
            <MapSuggestionBox
             value={address}
             onChange={handleChange}
             onSelect={handleSelect}/>
-          <Button variant="danger" onClick={() => clearPlaces(dayID)}>Clear</Button>
+
            {/*<Button variant="secondary" onClick={() => showMarkersByDay(dayID)}>Show Attractions on this day</Button>*/}
          </div>
        </div>

@@ -36,7 +36,7 @@ const MapSuggestionBox = (props) => {
     inputProps["className"] += "form-control";
     return (
         <div className="input-group mb-3" style={{"marginTop": "1%"}}>
-          <input {...inputProps} style={{"width": "90%"}} />
+          <input {...inputProps} style={{"width": "100%"}} />
         </div>
     );
   };
@@ -47,10 +47,10 @@ const MapSuggestionBox = (props) => {
           requestOptions={'tourist-attractions'}
       >
         {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-            <div>
+            <div style={{"position": "relative", "overflow-y": "visible"}}>
               {renderInput(getInputProps)}
 
-              <div className="autocomplete-dropdown-container" style={{position: 'absolute'}}
+              <div className="autocomplete-dropdown-container" style={{position: 'absolute', "overflow-y": "visible", "z-index": "100"}}
               >
                 {loading && <div>Loading...</div>}
                 {renderSuggestions(getSuggestionItemProps, suggestions)}

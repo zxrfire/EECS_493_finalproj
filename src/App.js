@@ -70,16 +70,18 @@ class App extends Component{
   };
 
   handleToggleDisplayMarkers = (indexOfDay) => {
+    console.log(`Toggling ${indexOfDay}`);
     let newDays = [...this.state.days];
     newDays[indexOfDay].toggleDisplayMarkers();
     this.setState({days: newDays});
   };
 
   setAttractionTime = (indexOfDay, placeIndex, plannedTime) => {
+    console.log(`Planned time is ${plannedTime}`);
     let newDays = [...this.state.days];
     newDays[indexOfDay].setAttractionTime(placeIndex, plannedTime);
     this.setState({days: newDays});
-  }
+  };
 
   /*sortAttractions = (indexOfDay) => {
     let newDays = [...this.state.days];
@@ -87,20 +89,9 @@ class App extends Component{
     this.setState({days: newDays});
   };*/
 
-  /*
-  showMarkersByDay = (indexOfDay) =>{
-      if (this.state.days.length === this.state.currentdays.length){
-         this.setState({currentdays: [indexOfDay]})
-      }
-     else{
-         // this.setState({currentdays: [[...this.state.currentdays]]})
-         this.setState({currentdays: [indexOfDay]})
-      }
-   };*/
+
 
   getMarkerLatLng = () => {
-    // let currdays = [];
-    // this.state.currentdays.forEach(index => currdays.push(this.state.days[index]));
     const markers = this.state.days.filter(day => day.displayMarkers).map(
         day => day.places.map(place => place.latLng)
     ).flat(1);
@@ -138,7 +129,6 @@ class App extends Component{
                     clearAttractions={this.handleClearAttractions}
                     deleteAttraction={this.handleDeleteAttraction}
                     getMarkersLatLng={this.getMarkerLatLng}
-                    showMarkersByDay={this.showMarkersByDay}
                     setAttractionTime={this.setAttractionTime}
                     //sortAttractions={this.sortAttractions}
                   ></MapContainer>
