@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+import {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useDrag} from 'react-dnd';
 import {Accordion, Row, Col} from 'react-bootstrap';
@@ -8,6 +9,9 @@ const RecommendationCard = props =>{
 
   const { attraction, attractionId } = props;
 
+
+  const [ url, setURL ] = useState("");
+
   const [{isDragging}, drag] = useDrag(() => ({
     type: "Place",
     collect: (monitor) => ({
@@ -15,20 +19,30 @@ const RecommendationCard = props =>{
     })
   }));
 
+
+  const handleCollapse = () => {
+    setURL(attraction.photos[0].getUrl());
+  };
+
+  const renderImage = () => {
+    return (
+            <Row>
+              <img src={url} />
+            </Row>);
+  };
+
   return (
       <Fragment>
         <Accordion.Item eventKey={attractionId}>
           <Accordion.Header className={"card shadow bg-body rounded"}
-                 ref={drag}>
+                 ref={drag} onClick={handleCollapse}>
               <div className={"d-flex justify-content-between align-items-center "}
                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <span className={"text-center"}>{attraction.name}</span>
               </div>
           </Accordion.Header>
           <Accordion.Body>
-            <Row>
-              <img src={attraction.photos[0].getUrl()} />
-            </Row>
+            {url !== "" && renderImage()}
             <Row>
               <Col xs={1} className={"d-flex align-items-center justify-content-center"}><span className="align-middle oi oi-home"></span></Col>
               <Col xs={11}><h7>{attraction.formatted_address}</h7></Col>

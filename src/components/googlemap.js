@@ -76,7 +76,7 @@ export default class MapContainer extends Component {
             {/*</div>*/}
 
             <div className={"row d-flex justify-content-evenly mt-4"}>
-              <Col xs={12} md={9}>
+              <Col xs={12} md={9} style={{padding: 0}}>
                 <MyMap
                     getMarkersLatLng={this.props.getMarkersLatLng}
                     mapCenter={this.state.mapCenter}

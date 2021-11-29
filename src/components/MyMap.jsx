@@ -49,6 +49,7 @@ export class MyMap extends Component{
       // width: '60vw',
       height: '100vh',
       position: "relative",
+              // marginRight:"0.5%",
       ...shadow
     };
     return  (
