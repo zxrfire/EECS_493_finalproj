@@ -52,10 +52,11 @@ class App extends Component{
     this.setState({currentdays: newday})
   };
 
-  handleNewAttraction = (indexOfDay, newAddress, newGeoObj, newLatLng) =>{
+  handleNewAttraction = async (indexOfDay, newAddress) =>{
     let newDays = [...this.state.days];
-    newDays[indexOfDay].addPlace(newAddress, newGeoObj, newLatLng);
+    const addedPlace = await newDays[indexOfDay].addPlace(newAddress);
     this.setState({days: newDays});
+    return addedPlace;
   };
 
   handleDeleteAttraction = (indexOfDay, placeIndex) => {
