@@ -1,7 +1,8 @@
 import React from 'react';
-//import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react'
-//import key1 from '../key';
-
+import '../style/MapContainer.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import RecommendationCard from './RecommendationCard';
+import {Accordion} from 'react-bootstrap';
 
 const Recommendations = props => {
 
@@ -20,23 +21,20 @@ const Recommendations = props => {
 
     getRecommendations();
 
-
-
     const renderList = () => {
         const {recommendations} = props;
-        return recommendations.map(attraction => (
-            <div className={"card shadow-sm p-2 mb-2 bg-body rounded"}>
-                <div className={"d-flex justify-content-between align-items-center "}>
-                    {attraction.name}
-                </div>
-            </div>
+        return recommendations.map((attraction, attractionId) => (
+            <RecommendationCard attraction={attraction}
+                                attractionId={attractionId}>
+            </RecommendationCard>
         ));
     };
 
     const renderTitle = () => {
       return (
           <div className={"card-title"}>
-              Recommended Attractions for {props.cityObj.formatted_address}
+            <h6>Recommended Attractions for:</h6>
+            <h6>{props.cityObj.formatted_address}</h6>
           </div>
       );
     };
@@ -60,9 +58,12 @@ const Recommendations = props => {
 
     return (
         <div className={"card day_card shadow p-2 mb-5 bg-white rounded"}>
-            {renderTitle()}
             <div className={"card-body"}>
+            {renderTitle()}
+              <Accordion>
+
                 {renderList()}
+              </Accordion>
             </div>
         </div>
     );

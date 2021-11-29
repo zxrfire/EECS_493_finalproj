@@ -10,23 +10,7 @@ import gsap from "gsap";
 const DayCards = props =>{
 
   let ref = useRef(null);
-  // const [scrollX, setscrollX] = useState(0);
-  // const [scrolEnd, setscrolEnd] = useState(false);
 
-  //Slide click
-  // const slide = (shift) => {
-  //   ref.current.scrollLeft += shift;
-  //   setscrollX(scrollX + shift);
-  //
-  //   if (
-  //       Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <=
-  //       ref.current.offsetWidth
-  //   ) {
-  //     setscrolEnd(true);
-  //   } else {
-  //     setscrolEnd(false);
-  //   }
-  // };
 
   const { scrollTop, curIndex, curItem } = useScrollWatch({
     ref: ref,
@@ -49,7 +33,8 @@ const DayCards = props =>{
 
   const renderDayCard = (day, id) => {
     return (
-        <div className="col-3" id={`Day-${id}`} key={id} >
+        <div className={"col-3"} id={`Day-${id}`} key={id}
+        style={{"margin-left": "0.1%", "margin-right": "0.1%"}}>
           <DayCard day={day}
                    key={id} dayID={id}
                    newPlace={props.handleNewAttraction}

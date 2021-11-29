@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import key1 from '../key';
+
 import '../style/MapContainer.css';
-// import {GoogleApiWrapper, Map, Marker} from 'google-maps-react';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -78,8 +77,8 @@ export default class MapContainer extends Component {
             {/*    /!*</ScrollMenu>*!/*/}
             {/*</div>*/}
 
-            <div className={"row d-flex justify-content-evenly"}>
-              <Col xs={12} md={9}>
+            <div className={"row d-flex justify-content-evenly mt-4"}>
+              <Col xs={12} md={9} style={{padding: 0}}>
                 <MyMap
                     getMarkersLatLng={this.props.getMarkersLatLng}
                     mapCenter={this.state.mapCenter}

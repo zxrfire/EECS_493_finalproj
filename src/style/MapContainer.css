@@ -45,6 +45,8 @@
 .wrapper-wrapper{
     display: flex;
     flex-direction: row;
+    margin-left: -2%;
+    margin-right: -2%;
 }
 
 #map{

@@ -1,5 +1,6 @@
 import logo from './logo.svg';
-
+import {DndProvider} from 'react-dnd';
+import {HTML5Backend} from 'react-dnd-html5-backend';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import StartPage from './components/StartPage'
 import ItineraryPage from './components/ItineraryPage';
@@ -118,20 +119,19 @@ class App extends Component{
                       newCity={this.handleNewCity}
                   ></StartPage>
                 }/>
-                  <Route path="itinerary" element={
-                    <ItineraryPage></ItineraryPage>
-                  }/>
                 <Route path="/map" element={
-                  <MapContainer {...this.state}
-                    newAttraction={this.handleNewAttraction}
-                    newRecommendations={this.handleNewRecommendation}
-                    toggleDisplayMarkers={this.handleToggleDisplayMarkers}
-                    clearAttractions={this.handleClearAttractions}
-                    deleteAttraction={this.handleDeleteAttraction}
-                    getMarkersLatLng={this.getMarkerLatLng}
-                    setAttractionTime={this.setAttractionTime}
-                    //sortAttractions={this.sortAttractions}
-                  ></MapContainer>
+                  <DndProvider backend={HTML5Backend}>
+                    <MapContainer {...this.state}
+                      newAttraction={this.handleNewAttraction}
+                      newRecommendations={this.handleNewRecommendation}
+                      toggleDisplayMarkers={this.handleToggleDisplayMarkers}
+                      clearAttractions={this.handleClearAttractions}
+                      deleteAttraction={this.handleDeleteAttraction}
+                      getMarkersLatLng={this.getMarkerLatLng}
+                      setAttractionTime={this.setAttractionTime}
+                      //sortAttractions={this.sortAttractions}
+                    ></MapContainer>
+                  </DndProvider>
                 } />
               </Routes>
           </div>

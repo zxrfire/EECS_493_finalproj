@@ -1,25 +1,7 @@
 import React, {Component} from 'react';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
-import moment from 'moment';
 
-// const showSecond = true;
-// const str = showSecond ? 'HH:mm:ss' : 'HH:mm';
-
-/*function TimePickerComponent() {
-    const [value, onChange] = useState('10:00');
-
-    return (
-        <TimePicker
-            onChange={onChange}
-            value={value}
-            disableClock={true}
-            hourPlaceholder="hh"
-            minutePlaceholder="mm"
-        />
-    );
-}*/
-// import Clock from 'react-clock';
 
 class TimePickerComponent extends Component {
     constructor(props) {
