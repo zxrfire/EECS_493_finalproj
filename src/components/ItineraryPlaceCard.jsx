@@ -6,13 +6,12 @@ import '../style/MapContainer.css'
 import TimePickerComponent from './TimePicker';
 import {Button} from 'react-bootstrap';
 
-const ItineraryPlace = props => {
+const ItineraryPlaceCard = props => {
 
   const {dayID, place, placeIndex, setAttractionTime, deletePlace} = props;
 
   return (
-      <div className={"card shadow-sm p-3 mb-1 bg-body rounded no-gutters"}
-           style={{"padding": "0!important"}}>
+      <div className={"card shadow-sm p-2 mb-2 bg-body rounded"}>
         <div className={"d-flex justify-content-between align-items-center "}>
           <div className={"col-xs-2 align-middle"}>
             <TimePickerComponent
@@ -43,4 +42,4 @@ const ItineraryPlace = props => {
 //
 // };
 
-export default ItineraryPlace;
+export default ItineraryPlaceCard;

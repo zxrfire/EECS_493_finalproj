@@ -1,5 +1,6 @@
 .day_card{
     margin-left: 10px;
     margin-right: 10px;
-    width:28rem;
+    width:24rem;
+    overflow-y: visible;
 }

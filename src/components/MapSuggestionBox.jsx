@@ -47,10 +47,10 @@ const MapSuggestionBox = (props) => {
           requestOptions={'tourist-attractions'}
       >
         {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
-            <div>
+            <div style={{"position": "relative", "overflow-y": "visible"}}>
               {renderInput(getInputProps)}
 
-              <div className="autocomplete-dropdown-container" style={{position: 'absolute'}}
+              <div className="autocomplete-dropdown-container" style={{position: 'absolute', "overflow-y": "visible", "z-index": "100"}}
               >
                 {loading && <div>Loading...</div>}
                 {renderSuggestions(getSuggestionItemProps, suggestions)}

@@ -9,7 +9,8 @@ import PlacesAutocomplete, {
 import {ScrollMenu, VisibilityContext} from 'react-horizontal-scrolling-menu';
 import DayCard from './DayCard';
 import MyMap from './MyMap';
-import Recommendation from './recommendation';
+import DayCards from './DayCards';
+import Recommendations from './Recommendations';
 
 import {Container, Row, Col, Button, CardGroup} from 'react-bootstrap';
 
@@ -54,39 +55,6 @@ export default class MapContainer extends Component {
     this.props.newAttraction(id, address, newAttractionGeoObj, newAttractionLatLng);
   };
 
-  // clearMarks() {
-  //   this.setState({
-  //     markers: [],
-  //   });
-  // }
-
-  // renderMarkers =  () => {
-  //   const markerLatLng = this.props.getMarkersLatLng();
-  //   console.log(markerLatLng);
-  //   return markerLatLng.map( (marker, id) =>
-  //       <Marker key={`Marker${id}`}
-  //         position={{lat: marker.lat, lng: marker.lng}}
-  //   />
-  //   );
-  // };
-
-  renderDayCard = (day, id) => {
-    return (
-        <DayCard day={day}
-          key={id} dayID={id}
-          newPlace={this.handleNewAttraction}
-          deletePlace={this.props.deleteAttraction}
-          clearPlaces={this.props.clearAttractions}
-          getMarkersLatLng={this.props.getMarkersLatLng}
-          // showMarkersByDay={this.props.showMarkersByDay}
-          toggleMarkers={this.props.toggleDisplayMarkers}
-          setAttractionTime={this.props.setAttractionTime}
-          //sortAttractions={this.props.sortAttractions}
-        >
-        </DayCard>
-    );
-  };
-
   render() {
     //let data1 = this.state.names;
 
@@ -96,34 +64,35 @@ export default class MapContainer extends Component {
     return (
         <div id="my-container">
               {/*// Array of Date cards*/}
-                <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-                  {/*<CardGroup>*/}
-                  {this.props.days.map(
-                      (day, id) => this.renderDayCard(day, id))}
-                  {/*</CardGroup>*/}
-                </ScrollMenu>
 
-              <Button className={"shadow p-2 mb-5 rounded"}
-                      onClick={this.clearMarks}>Clear</Button>
+            <DayCards
+                {...this.props}
+                handleNewAttraction={this.handleNewAttraction}
+            ></DayCards>
+            {/*<div className="scrolling-wrapper">*/}
+            {/*    /!*<ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>*!/*/}
+            {/*      {this.props.days.map(*/}
+            {/*          (day, id) => this.renderDayCard(day, id))}*/}
+            {/*    /!*</ScrollMenu>*!/*/}
+            {/*</div>*/}
 
-              {/*<div className={"centeredRow"} >*/}
-            <Row>
-              <Col xs={12} md={8}>
+            <div className={"row d-flex justify-content-evenly"}>
+              <Col xs={12} md={9}>
                 <MyMap
                     getMarkersLatLng={this.props.getMarkersLatLng}
                     mapCenter={this.state.mapCenter}
                 ></MyMap>
               </Col>
-              <Col xs={6} md={4}>
-                <Recommendation
+              <Col xs={6} md={3}>
+                <Recommendations
                     recommendations={this.props.recommendations}
                     newRecommendations={this.props.newRecommendations}
                     mapCenter={this.state.mapCenter}
                     cityObj={this.props.cities[0]}
                 >
-              </Recommendation>
+              </Recommendations>
               </Col>
-            </Row>
+            </div>
         </div>
     );
   }

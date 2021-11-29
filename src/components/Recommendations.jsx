@@ -3,7 +3,7 @@ import React from 'react';
 //import key1 from '../key';
 
 
-const Recommendation = props => {
+const Recommendations = props => {
 
 
     const getRecommendations = () => {
@@ -19,6 +19,27 @@ const Recommendation = props => {
     };
 
     getRecommendations();
+
+
+
+    const renderList = () => {
+        const {recommendations} = props;
+        return recommendations.map(attraction => (
+            <div className={"card shadow-sm p-2 mb-2 bg-body rounded"}>
+                <div className={"d-flex justify-content-between align-items-center "}>
+                    {attraction.name}
+                </div>
+            </div>
+        ));
+    };
+
+    const renderTitle = () => {
+      return (
+          <div className={"card-title"}>
+              Recommended Attractions for {props.cityObj.formatted_address}
+          </div>
+      );
+    };
 
     const createTable = () => {
         const {recommendations} = props;
@@ -38,10 +59,13 @@ const Recommendation = props => {
     };
 
     return (
-        <div>
-            {createTable()}
+        <div className={"card day_card shadow p-2 mb-5 bg-white rounded"}>
+            {renderTitle()}
+            <div className={"card-body"}>
+                {renderList()}
+            </div>
         </div>
     );
 };
 
-export default Recommendation;
+export default Recommendations;

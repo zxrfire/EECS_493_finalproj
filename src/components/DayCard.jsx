@@ -5,7 +5,7 @@ import 'open-iconic/font/css/open-iconic-bootstrap.css';
 import '../style/DayCard.css';
 import '../style/MapContainer.css';
 import MapSuggestionBox from './MapSuggestionBox';
-import ItineraryPlace from './ItineraryPlace';
+import ItineraryPlaceCard from './ItineraryPlaceCard';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
@@ -32,25 +32,25 @@ const DayCard = (props) => {
   };
 
   const renderList = () => {
-    console.log("Rendering day's places");
-    console.log(day.places);
+    // console.log("Rendering day's places");
+    // console.log(day.places);
     return day.places.map((place, placeIndex) => (
-        <ItineraryPlace
+        <ItineraryPlaceCard
             dayID={dayID}
             place={place}
             placeIndex={placeIndex}
             setAttractionTime={setAttractionTime}
             deletePlace={deletePlace}
-        ></ItineraryPlace>
+        ></ItineraryPlaceCard>
     ));
   };
 
   return (
-       <div className={"card day_card shadow p-3 mb-5 bg-white rounded"}
+       <div className={"card day_card shadow p-1 mb-2 bg-white rounded"}
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
          <div className={"card-body"}
-              style={{'minHeight': '450px', 'max-height': '500px'}}>
+              style={{'minHeight': '150px'}}>
            <Row className={"mb-2"}>
              <Col xs={12} md={10}>
                <h5 className="card-title">{getCardTitle()}</h5>
