@@ -45,10 +45,10 @@ class App extends Component{
 
     }
     this.setState({days: newDays});
-    let newday = []
+    let newday = [];
     newDays.forEach((ele, index) => {
         newday.push(index)
-    })
+    });
     this.setState({currentdays: newday})
   };
 

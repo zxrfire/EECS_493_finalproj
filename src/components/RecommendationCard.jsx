@@ -16,24 +16,25 @@ const RecommendationCard = props =>{
   const [ url, setURL ] = useState("");
 
   const [{isDragging}, drag] = useDrag(() => ({
-    type: "Place",
+    type: "Recommendation",
+    item: {attraction},
     collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
     })
   }));
 
 
-  // const handleCollapse = () => {
-  //   if (attraction.photos){
-  //     setURL(attraction.photos[0].getUrl());
-  //   }
-  //   axios.get("https://maps.googleapis.com/maps/api/place/details/json&place_id={attraction.place_id}&key=${key}`
-  // };
+  const handleCollapse = () => {
+    if (attraction.photos){
+      setURL(attraction.photos[0].getUrl());
+    }
+    // axios.get("https://maps.googleapis.com/maps/api/place/details/json&place_id={attraction.place_id}&key=${key}`
+  };
 
   const renderImage = () => {
     return (url !== "" &&
         <Row className={"mb-2"}>
-          <img src={url} />
+          <img src={url} alt={attraction.name} />
         </Row>);
   };
 
