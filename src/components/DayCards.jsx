@@ -31,8 +31,9 @@ const DayCards = props => {
 
   const renderDayCard = (day, id) => {
     return (
-        <div className={'col-3'} id={`Day-${id}`} key={id}
-             style={{'margin-left': '0.1%', 'margin-right': '0.1%'}}>
+        // <div className={'col-3'} id={`Day-${id}`} key={id}
+        //      // style={{'margin-left': '0.1%', 'margin-right': '0.1%'}}
+        // >
           <DayCard day={day}
                    key={id} dayID={id}
                    newPlace={props.handleNewAttraction}
@@ -44,7 +45,7 @@ const DayCards = props => {
                    setAttractionTime={props.setAttractionTime}
           >
           </DayCard>
-        </div>
+        // </div>
     );
   };
 
