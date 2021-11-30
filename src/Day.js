@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {geocodeByAddress, getLatLng,} from 'react-places-autocomplete';
+import Place from './Place';
 
 class Day{
   constructor(date) {
@@ -19,9 +19,7 @@ class Day{
 
   addPlace = async (newAddress) => {
     // getGeoObject
-    const newGeoObj =  (await geocodeByAddress(newAddress))[0];
-    const newLatLng = await getLatLng(newGeoObj);
-    const newPlace = new Place(newAddress, newGeoObj, newLatLng);
+    const newPlace = Place.createFromAddress(newAddress);
     this.places.push(newPlace);
     this.sortAttractions();
     return newPlace;
@@ -60,16 +58,7 @@ class Day{
     return a.valueOf() - b.valueOf();
     // return a.plannedTime < b.plannedTime ? -1 : (a.plannedTime > b.plannedTime ? 1 : 0);/**/
   }
-}
 
-class Place{
-  constructor(newAddress, geoObj, latLng) {
-    this.address = newAddress;
-    this.plannedTime = null;
-    this.geoObj = geoObj;
-    this.latLng = latLng;
-
-  }
 }
 
 export default Day;

@@ -17,24 +17,24 @@ const RecommendationCard = props =>{
 
   const [{isDragging}, drag] = useDrag(() => ({
     type: "Recommendation",
-    item: {attraction},
+    item: {attractionId},
     collect: (monitor) => ({
         isDragging: !!monitor.isDragging(),
     })
   }));
 
 
-  const handleCollapse = () => {
-    if (attraction.photos){
-      setURL(attraction.photos[0].getUrl());
-    }
-    // axios.get("https://maps.googleapis.com/maps/api/place/details/json&place_id={attraction.place_id}&key=${key}`
-  };
+  // const handleCollapse = () => {
+  //   if (attraction.photos){
+  //     setURL(attraction.photos[0].getUrl());
+  //   }
+  //   // axios.get("https://maps.googleapis.com/maps/api/place/details/json&place_id={attraction.place_id}&key=${key}`
+  // };
 
   const renderImage = () => {
-    return (url !== "" &&
+    return (attraction.imageURL !== "" &&
         <Row className={"mb-2"}>
-          <img src={url} alt={attraction.name} />
+          <img src={attraction.imageURL} alt={attraction.address} />
         </Row>);
   };
 
@@ -80,10 +80,10 @@ const RecommendationCard = props =>{
       <Fragment>
         <Accordion.Item eventKey={attractionId}>
           <Accordion.Header className={"card shadow bg-body rounded"}
-                 ref={drag} onClick={handleCollapse}>
+                 ref={drag}>
               <div className={"d-flex justify-content-between align-items-center "}
                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <span className={"text-center"}>{attraction.name}</span>
+                <span className={"text-center"}>{attraction.address}</span>
               </div>
           </Accordion.Header>
           <Accordion.Body>
@@ -91,7 +91,7 @@ const RecommendationCard = props =>{
             {renderRatings()}
             <Row className={"mt-1"}>
               <Col xs={1} className={"d-flex align-items-center justify-content-center"}><span className="align-middle oi oi-home"></span></Col>
-              <Col xs={11}><h7>{attraction.formatted_address}</h7></Col>
+              <Col xs={11}><h6>{attraction.formatted_address}</h6></Col>
             </Row>
           </Accordion.Body>
         </Accordion.Item>

@@ -8,7 +8,8 @@ import {Component} from 'react';
 import React from "react";
 import MapContainer from './components/googlemap';
 import moment from 'moment';
-import Day from "./Day"
+import Day from "./Day";
+import Place from "./Place";
 
 class App extends Component{
   constructor(props) {
@@ -85,14 +86,6 @@ class App extends Component{
     this.setState({days: newDays});
   };
 
-  /*sortAttractions = (indexOfDay) => {
-    let newDays = [...this.state.days];
-    newDays[indexOfDay].sortAttractions(); //sort attractions by time for this day
-    this.setState({days: newDays});
-  };*/
-
-
-
   getMarkerLatLng = () => {
     const markers = this.state.days.filter(day => day.displayMarkers).map(
         day => day.places.map(place => place.latLng)
@@ -103,9 +96,22 @@ class App extends Component{
   };
 
   handleNewRecommendation = (newRecommendations) => {
-    this.setState({recommendations: newRecommendations});
+    const transformRecs = newRecommendations.map(Place.createFromRecommendation);
+    this.setState({recommendations: transformRecs});
   };
 
+
+  // add recommendationIdx's place to the day
+  handleDropRecommendation = async (indexOfDay, recommendationIdx) => {
+    let newDays = [...this.state.days];
+    let newRecs = [...this.state.recommendations];
+    const newRec = this.state.recommendations[recommendationIdx];
+    await newRec.prepGeoLat();
+    newDays[indexOfDay].places.push(newRec);
+    this.setState({days: newDays});
+    newRecs[recommendationIdx] = newRec;
+    this.setState({recommendations: newRecs});
+  };
 
   render(){
     return (
@@ -125,12 +131,12 @@ class App extends Component{
                     <MapContainer {...this.state}
                       newAttraction={this.handleNewAttraction}
                       newRecommendations={this.handleNewRecommendation}
+                      newDropRecommendation={this.handleDropRecommendation}
                       toggleDisplayMarkers={this.handleToggleDisplayMarkers}
                       clearAttractions={this.handleClearAttractions}
                       deleteAttraction={this.handleDeleteAttraction}
                       getMarkersLatLng={this.getMarkerLatLng}
                       setAttractionTime={this.setAttractionTime}
-                      //sortAttractions={this.sortAttractions}
                     ></MapContainer>
                   </DndProvider>
                 } />

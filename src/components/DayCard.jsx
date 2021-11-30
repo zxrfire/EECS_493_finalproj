@@ -10,22 +10,22 @@ import ItineraryPlaceCard from './ItineraryPlaceCard';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
-  const { day, dayID, newPlace, deletePlace, clearPlaces, toggleMarkers, setAttractionTime } = props;
+  const { day, dayID, newPlace, deletePlace, clearPlaces, toggleMarkers, setAttractionTime,
+    newDropRecommendation} = props;
 
   const [address, setAddress] = useState("");
 
   const [{isOver}, drop] = useDrop(() => ({
     accept: "Recommendation",
-    drop: (item) => handleDropRecommendation(item.attraction),
+    drop: async (item) => handleDropRecommendation(item.attractionId),
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
     }),
   }));
 
 
-  const handleDropRecommendation = async (attraction) => {
-      console.log(attraction);
-      await handleSelect(attraction.name);
+  const handleDropRecommendation = async (recommendationIdx) => {
+    await newDropRecommendation(dayID, recommendationIdx);
   };
 
   const getCardTitle = ()=>{

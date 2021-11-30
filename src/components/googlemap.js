@@ -43,23 +43,13 @@ export default class MapContainer extends Component {
 
   handleNewAttraction = async (id, address) => {
     console.log(address);
-    // this.setState({address});
-    // this.setState({names: [...this.state.names, address]});
-    // this.updateMap(address);
     const newPlace = await this.props.newAttraction(id, address);
-
-    // const newAttractionGeoObj =  (await this.getLocationObject(address))[0];
-    // const newAttractionLatLng = await getLatLng(newAttractionGeoObj);
     console.log(newPlace);
     await this.updateMap(newPlace.latLng);
+    return newPlace;
   };
 
   render() {
-    //let data1 = this.state.names;
-
-    const shadow = {
-      "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-    };
     return (
         <div id="my-container">
               {/*// Array of Date cards*/}
