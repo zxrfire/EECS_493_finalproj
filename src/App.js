@@ -21,7 +21,8 @@ class App extends Component{
       cities: [],
       days: [],
       currentdays: [],
-      recommendations: []
+      recommendations: [],
+      usedDragDrop: false
     }
   };
   handleNewStartDate = (event) => {
@@ -42,7 +43,6 @@ class App extends Component{
     }
     let newDays = [];
     // generate the trip dates
-    // TODO: iterate through the days
     // If you want an inclusive end date (fully-closed interval)
     for (let m = moment(this.state.startDate);
       m.diff(this.state.endDate, 'days') <= 0; m.add(1, 'days')) {
@@ -124,6 +124,10 @@ class App extends Component{
     this.setState({recommendations: newRecs});
   };
 
+  handleUseDragDrop = () => {
+    this.setState({usedDragDrop: true});
+  };
+
   render(){
     return (
         <BrowserRouter>
@@ -149,6 +153,7 @@ class App extends Component{
                       deleteAttraction={this.handleDeleteAttraction}
                       getMarkersLatLng={this.getMarkerLatLng}
                       setAttractionTime={this.setAttractionTime}
+                      setUsedDragDrop={this.handleUseDragDrop}
                     ></MapContainer>
                   </DndProvider>
                 } />

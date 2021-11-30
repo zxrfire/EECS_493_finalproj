@@ -10,10 +10,7 @@ import axios from 'axios';
 
 const RecommendationCard = props =>{
 
-  const { attraction, attractionId } = props;
-
-
-  const [ url, setURL ] = useState("");
+  const { attraction, attractionId} = props;
 
   const [{isDragging}, drag] = useDrag(() => ({
     type: "Recommendation",

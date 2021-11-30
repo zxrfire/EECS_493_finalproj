@@ -77,6 +77,8 @@ export default class MapContainer extends Component {
               </Col>
               <Col xs={6} md={3}>
                 <Recommendations
+                    usedDragDrop={this.props.usedDragDrop}
+                    setUsedDragDrop={this.props.setUsedDragDrop}
                     recommendations={this.props.recommendations}
                     newRecommendations={this.props.newRecommendations}
                     mapCenter={this.state.mapCenter}
@@ -90,36 +92,3 @@ export default class MapContainer extends Component {
     );
   }
 }
-
-const Arrow = ({text, className}) => {
-  return (
-      <div
-          className={className}
-      >{text}</div>
-  );
-};
-
-function LeftArrow() {
-  const {isFirstItemVisible, scrollPrev} = React.useContext(VisibilityContext);
-
-  return (
-      <Arrow disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
-        Left
-      </Arrow>
-  );
-}
-
-function RightArrow() {
-  const {isLastItemVisible, scrollNext} = React.useContext(VisibilityContext);
-
-  return (
-      <Arrow disabled={isLastItemVisible} onClick={() => scrollNext()}>
-        Right
-      </Arrow>
-  );
-}
-
-
-// export default GoogleApiWrapper({
-//   apiKey: (key1),
-// })(MapContainer);

@@ -39,6 +39,7 @@ const Recommendations = props => {
           <div className={"card-title"}>
             <h6>Recommended Attractions for:</h6>
             <h6>{props.cityObj.formatted_address}</h6>
+            {!props.usedDragDrop && <p class="text-muted">You may drag and drop the items to your itinerary list</p>}
           </div>
       );
     };
@@ -48,7 +49,6 @@ const Recommendations = props => {
             <div className={"card-body"}>
             {renderTitle()}
               <Accordion>
-
                 {renderList()}
               </Accordion>
             </div>
