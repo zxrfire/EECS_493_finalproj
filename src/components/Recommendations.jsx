@@ -37,10 +37,10 @@ function Recommendations (props) {
 
     const renderList = () => {
         const {recommendations, moreRecInfo} = props;
-        return recommendations.map((attraction, attractionId) => (
-            <RecommendationCard attraction={attraction}
-                                moreRecInfo={() => moreRecInfo(attractionId)}
-                                attractionId={attractionId}>
+        return recommendations.map((recPlace, recId) => (
+            <RecommendationCard attraction={recPlace}
+                                moreRecInfo={() => moreRecInfo(recId)}
+                                attractionId={recId}>
             </RecommendationCard>
         ));
     };
@@ -73,6 +73,6 @@ function Recommendations (props) {
             </div>
         </div>
     );
-};
+}
 
 export default Recommendations;

@@ -75,6 +75,9 @@ class Place {
         .then((response) => {
           console.log(JSON.stringify(response.data));
           this.hadDetails = true;
+          for (const [key, value] of Object.entries(response.data.result)) {
+            this[key] = value;
+          }
         })
         .catch(function (error) {
           console.log(error);
