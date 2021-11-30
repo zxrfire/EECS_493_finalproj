@@ -25,6 +25,7 @@ class TimePickerComponent extends Component {
     };
 
 
+
     render() {
         // const time = this.state.value;
         return (
@@ -38,6 +39,7 @@ class TimePickerComponent extends Component {
                 clearIcon={null}
                 allowEmpty={false}
                 onChange={this.handleChange}
+                onClose={this.props.newSortOrder}
             />
             </div>
         );

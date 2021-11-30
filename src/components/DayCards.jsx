@@ -37,6 +37,7 @@ const DayCards = props => {
           <DayCard day={day}
                    key={id} dayID={id}
                    newPlace={props.handleNewAttraction}
+                   newSortOrder={() => props.newSortOrder(id)}
                    newDropRecommendation={props.newDropRecommendation}
                    deletePlace={props.deleteAttraction}
                    clearPlaces={props.clearAttractions}

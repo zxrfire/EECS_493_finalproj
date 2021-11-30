@@ -31,7 +31,7 @@ class App extends Component{
     this.setState({endDate:  moment().format(event.target.value)});
   };
   handleNewCity = (city) => {
-    this.setState({cities: [...this.state.cities, city]});
+    this.setState({cities: [city]});
   };
   handleCreateTrip = (event) => {
     console.log("Creating new Trip");
@@ -91,6 +91,12 @@ class App extends Component{
     this.setState({days: newDays});
   };
 
+  handleSortTime = (indexOfDay) => {
+    let newDays = [...this.state.days];
+    newDays[indexOfDay].sortPlaceByTime();
+    this.setState({days: newDays});
+  };
+
   getMarkerLatLng = () => {
     const markers = this.state.days.filter(day => day.displayMarkers).map(
         day => day.places.map(place => place.latLng)
@@ -136,6 +142,7 @@ class App extends Component{
                     <MapContainer {...this.state}
                       newAttraction={this.handleNewAttraction}
                       newRecommendations={this.handleNewRecommendation}
+                      newSortOrder={this.handleSortTime}
                       newDropRecommendation={this.handleDropRecommendation}
                       toggleDisplayMarkers={this.handleToggleDisplayMarkers}
                       clearAttractions={this.handleClearAttractions}

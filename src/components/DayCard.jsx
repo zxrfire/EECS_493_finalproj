@@ -56,6 +56,7 @@ const DayCard = (props) => {
             place={place}
             placeIndex={placeIndex}
             setAttractionTime={setAttractionTime}
+            newSortOrder={props.newSortOrder}
             deletePlace={deletePlace}
         ></ItineraryPlaceCard>
     ));

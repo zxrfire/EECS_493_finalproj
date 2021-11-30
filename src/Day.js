@@ -21,7 +21,7 @@ class Day{
     // getGeoObject
     const newPlace = await Place.createFromAddress(newAddress);
     this.places.push(newPlace);
-    this.sortAttractions();
+    this.sortPlaceByTime();
     return newPlace;
   };
   // addPlace(newAddress, newGeoObj, newLatLng) {
@@ -35,10 +35,10 @@ class Day{
 
   setAttractionTime(placeIndex, plannedTime) {
     this.places[placeIndex].plannedTime = plannedTime;
-    this.sortAttractions();
+    // this.sortAttractions();
   }
 
-  sortAttractions() {
+  sortPlaceByTime() {
     this.places.sort(this.sortByTime);
   }
 

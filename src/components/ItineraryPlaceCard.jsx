@@ -19,6 +19,7 @@ const ItineraryPlaceCard = props => {
                 displayTime={place.plannedTime}
                 dayID={dayID}
                 placeIndex={placeIndex}
+                newSortOrder={props.newSortOrder}
             />
           </div>
           <div className={"col-xs-7 align-middle"}>
