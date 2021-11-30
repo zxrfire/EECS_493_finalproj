@@ -10,6 +10,7 @@ import DayCard from './DayCard';
 import MyMap from './MyMap';
 import DayCards from './DayCards';
 import Recommendations from './Recommendations';
+import logo from '../tripwithmelogo.png'
 
 import {Container, Row, Col, Button, CardGroup} from 'react-bootstrap';
 
@@ -62,7 +63,7 @@ export default class MapContainer extends Component {
     };
     return (
         <>
-            <a href='/'><img src="../tripwithmelogo.png"></img></a>
+            {/*<a href='/'><img src={logo} style={{height:"100px", width: "100px"}}/></a>*/}
         <div id="my-container">
               {/*// Array of Date cards*/}
 
