@@ -20,8 +20,9 @@ class TimePickerComponent extends Component {
     displayingTime = () => {
         if (this.props.displayTime != null){
             return this.props.displayTime;
+        } else {
+            return undefined;
         }
-        return null;
     };
 
 
@@ -35,6 +36,7 @@ class TimePickerComponent extends Component {
                 style={{ padding: "0"}}
                 showSecond={false}
                 value={this.displayingTime()}
+                placeholder={"--:--"}
                 className="xxx"
                 clearIcon={null}
                 allowEmpty={false}
