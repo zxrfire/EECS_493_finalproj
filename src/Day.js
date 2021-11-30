@@ -1,4 +1,5 @@
 import moment from 'moment';
+import Place from './Place';
 
 class Day{
   constructor(date) {
@@ -16,10 +17,17 @@ class Day{
     this.places = [];
   }
 
-  addPlace(newAddress, newGeoObj, newLatLng) {
-    this.places.push(new Place(newAddress, newGeoObj, newLatLng));
-    //this.sortAttractions();
-  }
+  addPlace = async (newAddress) => {
+    // getGeoObject
+    const newPlace = Place.createFromAddress(newAddress);
+    this.places.push(newPlace);
+    this.sortAttractions();
+    return newPlace;
+  };
+  // addPlace(newAddress, newGeoObj, newLatLng) {
+  //   this.places.push(new Place(newAddress, newGeoObj, newLatLng));
+  //   //this.sortAttractions();
+  // }
 
   deletePlace(addressIdx){
     this.places.splice(addressIdx, 1);
@@ -50,15 +58,7 @@ class Day{
     return a.valueOf() - b.valueOf();
     // return a.plannedTime < b.plannedTime ? -1 : (a.plannedTime > b.plannedTime ? 1 : 0);/**/
   }
-}
 
-class Place{
-  constructor(newAddress, geoObj, latLng) {
-    this.address = newAddress;
-    this.plannedTime = null;
-    this.geoObj = geoObj;
-    this.latLng = latLng;
-  }
 }
 
 export default Day;

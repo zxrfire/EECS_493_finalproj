@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Col, Row} from 'react-bootstrap';
+import {useDrop} from 'react-dnd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'open-iconic/font/css/open-iconic-bootstrap.css';
 import '../style/DayCard.css';
@@ -9,9 +10,23 @@ import ItineraryPlaceCard from './ItineraryPlaceCard';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
-  const { day, dayID, newPlace, deletePlace, clearPlaces, toggleMarkers, setAttractionTime } = props;
+  const { day, dayID, newPlace, deletePlace, clearPlaces, toggleMarkers, setAttractionTime,
+    newDropRecommendation} = props;
 
   const [address, setAddress] = useState("");
+
+  const [{isOver}, drop] = useDrop(() => ({
+    accept: "Recommendation",
+    drop: async (item) => handleDropRecommendation(item.attractionId),
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
+  }));
+
+
+  const handleDropRecommendation = async (recommendationIdx) => {
+    await newDropRecommendation(dayID, recommendationIdx);
+  };
 
   const getCardTitle = ()=>{
     // format in english form
@@ -29,6 +44,7 @@ const DayCard = (props) => {
   const handleSelect = async (address) =>{
     setAddress(address);
     await newPlace(dayID, address);
+    setAddress(""); // clear the value?
   };
 
   const renderList = () => {
@@ -50,7 +66,7 @@ const DayCard = (props) => {
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
          <div className={"card-body"}
-              style={{'minHeight': '150px'}}>
+              style={{'minHeight': '150px'}} ref={drop}>
            <Row className={"mb-2"}>
              <Col xs={12} md={10}>
                <h5 className="card-title">{getCardTitle()}</h5>

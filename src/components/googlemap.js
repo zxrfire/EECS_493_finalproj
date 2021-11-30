@@ -34,7 +34,6 @@ export default class MapContainer extends Component {
       getLatLng(props.cities[0]).then(this.updateMap);
     }
   }
-  getLocationObject = address => geocodeByAddress(address);
 
   updateMap = (latLng) => {
             console.log('Success', latLng);
@@ -45,22 +44,13 @@ export default class MapContainer extends Component {
 
   handleNewAttraction = async (id, address) => {
     console.log(address);
-    // this.setState({address});
-    // this.setState({names: [...this.state.names, address]});
-    // this.updateMap(address);
-    const newAttractionGeoObj =  (await this.getLocationObject(address))[0];
-    const newAttractionLatLng = await getLatLng(newAttractionGeoObj);
-    console.log(newAttractionGeoObj);
-    await this.updateMap(newAttractionLatLng);
-    this.props.newAttraction(id, address, newAttractionGeoObj, newAttractionLatLng);
+    const newPlace = await this.props.newAttraction(id, address);
+    console.log(newPlace);
+    await this.updateMap(newPlace.latLng);
+    return newPlace;
   };
 
   render() {
-    //let data1 = this.state.names;
-
-    const shadow = {
-      "box-shadow": "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-    };
     return (
         <>
             {/*<a href='/'><img src={logo} style={{height:"100px", width: "100px"}}/></a>*/}
