@@ -130,8 +130,12 @@ class App extends Component{
     this.setState({usedDragDrop: true});
   };
 
-  handleRecommendationMoreInfo = async (recommendationIdx) => {
-
+  handleMoreRecommendationInfo = async (recommendationIdx) => {
+    let newRecs = [...this.state.recommendations];
+    const newRec = newRecs[recommendationIdx];
+    await newRec.getDetailedInfo();
+    newRecs[recommendationIdx]= newRec;
+    this.setState({recommendations: newRecs});
   };
 
   render(){
@@ -154,6 +158,7 @@ class App extends Component{
                       newRecommendations={this.handleNewRecommendation}
                       newSortOrder={this.handleSortTime}
                       newDropRecommendation={this.handleDropRecommendation}
+                      moreRecInfo={this.handleMoreRecommendationInfo}
                       toggleDisplayMarkers={this.handleToggleDisplayMarkers}
                       clearAttractions={this.handleClearAttractions}
                       deleteAttraction={this.handleDeleteAttraction}

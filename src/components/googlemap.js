@@ -41,7 +41,6 @@ export default class MapContainer extends Component {
 
   componentDidMount() {
       window.addEventListener("onbeforeunload ", (e) => {
-
           e.preventDefault();
           cookies.remove("city");
       });
@@ -94,7 +93,7 @@ export default class MapContainer extends Component {
               <Col xs={6} md={3}>
                 <Recommendations
                     usedDragDrop={this.props.usedDragDrop}
-                    setUsedDragDrop={this.props.setUsedDragDrop}
+                    moreRecInfo={this.props.moreRecInfo}
                     recommendations={this.props.recommendations}
                     newRecommendations={this.props.newRecommendations}
                     mapCenter={this.state.mapCenter}

@@ -11,6 +11,7 @@ class Place {
     this.latLng = latLng;
     this.placeID = null;
     this.imageURL = null;
+    this.hadDetails = false;
   }
 
   prepGeoLat = async () => {
@@ -38,22 +39,46 @@ class Place {
     return newPlace;
   };
 
-  getDetailedInfo = async () => {
-      if (this.placeID){
-        const axios = require('axios');
-        let queries = ["formatted_phone_number",
-          "international_phone_number", "opening_hours", "website",
-          "price_level"];
-        if (! this.imageURL || !this['photo']){
-          queries.push("photo");
-        }
+  static formQuery = (placeID, fields) => {
+    let query = `https://warm-savannah-56575.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&fields=`;
+    const sep = "%2C";
+    for (let i = 0; i < fields.length; ++i){
+      query += fields[i];
+      if (i !== fields.length - 1){
+        query += sep;
+      }
+    }
+    query += `&key=${key}`;
+    return query;
+  };
 
+  getDetailedInfo = async () => {
+      if (this['place_id'] && !this.hadDetails){
+        const axios = require('axios');
+        let fields = ["formatted_phone_number",
+          "international_phone_number", "opening_hours/weekday_text", "website"];
+        if (! this.imageURL && !this['photo']){
+          fields.push("photo");
+        }
+        if (! this['rating']){
+          fields.push("rating");
+        }
 
         const config = {
           method: 'get',
-          url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key=YOUR_API_KEY',
-          headers: { }
+          url: Place.formQuery(this['place_id'], fields),
+          headers: {'Access-Control-Allow-Origin': '*'},
+          withCredentials: false,
         };
+
+        await axios(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+          this.hadDetails = true;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       }
   };
 }

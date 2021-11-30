@@ -6,7 +6,7 @@ import {Accordion} from 'react-bootstrap';
 import Cookies from 'universal-cookie';
 import {Navigate, useNavigate} from "react-router-dom";
 
-const cookies = new Cookies()
+const cookies = new Cookies();
 
 function Recommendations (props) {
     let navigate = useNavigate();
@@ -36,32 +36,31 @@ function Recommendations (props) {
 
 
     const renderList = () => {
-        const {recommendations} = props;
+        const {recommendations, moreRecInfo} = props;
         return recommendations.map((attraction, attractionId) => (
             <RecommendationCard attraction={attraction}
+                                moreRecInfo={() => moreRecInfo(attractionId)}
                                 attractionId={attractionId}>
             </RecommendationCard>
         ));
     };
 
     const renderTitle = () => {
-    if (!props.cityObj){
-        return(
-         <Navigate to="/"/>
-    )
-        }
-    else
-        {
-            return (
-                <div className={"card-title"}>
-                    <h6>Recommended Attractions for:</h6>
-                    <h6>{props.cityObj.formatted_address}</h6>
-                    {!props.usedDragDrop &&
-                    <p class="text-muted">You may drag and drop the items to
-                        your itinerary list</p>}
-                </div>
-            );
-        }
+    if (props.cityObj) {
+      return (
+          <div className={"card-title"}>
+            <h6>Recommended Attractions for:</h6>
+            <h6>{props.cityObj.formatted_address}</h6>
+            {!props.usedDragDrop &&
+            <p class="text-muted">You may drag and drop the items to
+              your itinerary list</p>}
+          </div>
+      );
+    } else {
+      return (
+          <Navigate to="/"/>
+      )
+    }
     };
 
     return (

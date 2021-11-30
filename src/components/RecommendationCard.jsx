@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const RecommendationCard = props =>{
 
-  const { attraction, attractionId} = props;
+  const { attraction, attractionId, moreRecInfo} = props;
 
   const [{isDragging}, drag] = useDrag(() => ({
     type: "Recommendation",
@@ -22,6 +22,7 @@ const RecommendationCard = props =>{
 
 
   const handleCollapse = async () => {
+    moreRecInfo();
   //   if (attraction.photos){
   //     setURL(attraction.photos[0].getUrl());
   //   }
@@ -77,7 +78,7 @@ const RecommendationCard = props =>{
       <Fragment>
         <Accordion.Item eventKey={attractionId}>
           <Accordion.Header className={"card shadow bg-body rounded"}
-                 ref={drag}>
+                 ref={drag} onClick={handleCollapse}>
               <div className={"d-flex justify-content-between align-items-center "}
                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <span className={"text-center"}>{attraction.address}</span>
