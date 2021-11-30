@@ -73,6 +73,7 @@
     "google-map-react": "^2.1.10",
     "react-geocode": "^0.2.3",
     "react-google-autocomplete": "^2.6.0",
-    "react-horizontal-scrolling-menu": "^2.5.2"
+    "react-horizontal-scrolling-menu": "^2.5.2",
+    "universal-cookie": "^4.0.4"
   }
 }

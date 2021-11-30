@@ -8,6 +8,7 @@ import {Col, Container, Row} from 'react-bootstrap';
 import Autocomplete from "react-google-autocomplete";
 import DatePicker from "react-datepicker";
 
+
 // page to ask start date and the end data
 const StartPage = props => {
 
