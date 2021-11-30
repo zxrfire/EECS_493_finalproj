@@ -45,7 +45,7 @@ const DayCards = props => {
                    setAttractionTime={props.setAttractionTime}
           >
           </DayCard>
-        // </div>
+         // {/*</div>*/}
     );
   };
 

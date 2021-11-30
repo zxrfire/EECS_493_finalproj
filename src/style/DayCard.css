@@ -3,4 +3,5 @@
     margin-right: 1%;
     width:25rem;
     overflow-y: visible;
+    min-width: 24rem;
 }
