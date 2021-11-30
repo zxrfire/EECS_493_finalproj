@@ -42,6 +42,7 @@ class TimePickerComponent extends Component {
                 allowEmpty={false}
                 onChange={this.handleChange}
                 onClose={this.props.newSortOrder}
+                use12Hours={true}
             />
             </div>
         );

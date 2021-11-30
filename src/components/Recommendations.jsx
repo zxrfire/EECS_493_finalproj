@@ -50,14 +50,18 @@ function Recommendations (props) {
          <Navigate to="/"/>
     )
         }
-    else {
-        return (
-            <div className={"card-title"}>
-                <h6>Recommended Attractions for:</h6>
-                <h6>{props.cityObj.formatted_address}</h6>
-            </div>
-        );
-    }
+    else
+        {
+            return (
+                <div className={"card-title"}>
+                    <h6>Recommended Attractions for:</h6>
+                    <h6>{props.cityObj.formatted_address}</h6>
+                    {!props.usedDragDrop &&
+                    <p class="text-muted">You may drag and drop the items to
+                        your itinerary list</p>}
+                </div>
+            );
+        }
     };
 
     return (
@@ -65,7 +69,6 @@ function Recommendations (props) {
             <div className={"card-body"}>
             {renderTitle()}
               <Accordion>
-
                 {renderList()}
               </Accordion>
             </div>

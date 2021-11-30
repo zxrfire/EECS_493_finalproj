@@ -44,6 +44,8 @@ const DayCards = props => {
                    getMarkersLatLng={props.getMarkersLatLng}
                    toggleMarkers={props.toggleDisplayMarkers}
                    setAttractionTime={props.setAttractionTime}
+                   usedDragDrop={props.usedDragDrop}
+                   setUsedDragDrop={props.setUsedDragDrop}
           >
           </DayCard>
          // {/*</div>*/}
