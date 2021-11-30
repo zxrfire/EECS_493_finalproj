@@ -35,6 +35,11 @@ class App extends Component{
   };
   handleCreateTrip = (event) => {
     console.log("Creating new Trip");
+    if (this.state.startDate > this.state.endDate){
+      event.preventDefault();
+      alert("Your Trip's start date is after the end date!");
+      return;
+    }
     let newDays = [];
     // generate the trip dates
     // TODO: iterate through the days

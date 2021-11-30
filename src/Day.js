@@ -19,7 +19,7 @@ class Day{
 
   addPlace = async (newAddress) => {
     // getGeoObject
-    const newPlace = Place.createFromAddress(newAddress);
+    const newPlace = await Place.createFromAddress(newAddress);
     this.places.push(newPlace);
     this.sortAttractions();
     return newPlace;
