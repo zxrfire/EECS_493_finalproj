@@ -1,5 +1,7 @@
 import moment from 'moment';
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
+import key from "./key"
+
 
 class Place {
   constructor(newAddress, geoObj, latLng) {
@@ -37,7 +39,22 @@ class Place {
   };
 
   getDetailedInfo = async () => {
+      if (this.placeID){
+        const axios = require('axios');
+        let queries = ["formatted_phone_number",
+          "international_phone_number", "opening_hours", "website",
+          "price_level"];
+        if (! this.imageURL || !this['photo']){
+          queries.push("photo");
+        }
 
+
+        const config = {
+          method: 'get',
+          url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key=YOUR_API_KEY',
+          headers: { }
+        };
+      }
   };
 }
 

@@ -21,12 +21,12 @@ const RecommendationCard = props =>{
   }));
 
 
-  // const handleCollapse = () => {
+  const handleCollapse = async () => {
   //   if (attraction.photos){
   //     setURL(attraction.photos[0].getUrl());
   //   }
   //   // axios.get("https://maps.googleapis.com/maps/api/place/details/json&place_id={attraction.place_id}&key=${key}`
-  // };
+  };
 
   const renderImage = () => {
     return (attraction.imageURL !== "" &&

@@ -33,7 +33,7 @@ class TimePickerComponent extends Component {
             <div style={{"width": "48px"}}>
 
             <TimePicker
-                style={{ padding: "0"}}
+                style={{ padding: "0", width: 48}}
                 showSecond={false}
                 value={this.displayingTime()}
                 placeholder={"--:--"}

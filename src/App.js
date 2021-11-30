@@ -3,7 +3,6 @@ import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import StartPage from './components/StartPage'
-import ItineraryPage from './components/ItineraryPage';
 import {Component} from 'react';
 import React from "react";
 import MapContainer from './components/googlemap';
@@ -20,7 +19,6 @@ class App extends Component{
       endDate: null,
       cities: [],
       days: [],
-      currentdays: [],
       recommendations: [],
       usedDragDrop: false
     }
@@ -126,6 +124,10 @@ class App extends Component{
 
   handleUseDragDrop = () => {
     this.setState({usedDragDrop: true});
+  };
+
+  handleRecommendationMoreInfo = async (recommendationIdx) => {
+
   };
 
   render(){
