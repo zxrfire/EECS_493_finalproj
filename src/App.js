@@ -9,6 +9,8 @@ import MapContainer from './components/googlemap';
 import moment from 'moment';
 import Day from "./Day";
 import Place from "./Place";
+import Cookies from 'universal-cookie';
+
 
 class App extends Component{
   constructor(props) {
@@ -54,6 +56,8 @@ class App extends Component{
         newday.push(index)
     });
     this.setState({currentdays: newday})
+    const cookies = new Cookies();
+    cookies.set('city', 'yes', { path: '/' });
   };
 
   handleNewAttraction = async (indexOfDay, newAddress) =>{

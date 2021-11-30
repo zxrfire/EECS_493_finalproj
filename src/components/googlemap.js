@@ -11,8 +11,12 @@ import MyMap from './MyMap';
 import DayCards from './DayCards';
 import Recommendations from './Recommendations';
 import logo from '../tripwithmelogo.png'
+import Cookies from 'universal-cookie';
+import { Navigate} from 'react-router-dom';
 
 import {Container, Row, Col, Button, CardGroup} from 'react-bootstrap';
+
+const cookies = new Cookies();
 
 export default class MapContainer extends Component {
   constructor(props) {
@@ -35,7 +39,15 @@ export default class MapContainer extends Component {
     }
   }
 
-  updateMap = (latLng) => {
+  componentDidMount() {
+      window.addEventListener("onbeforeunload ", (e) => {
+
+          e.preventDefault();
+          cookies.remove("city");
+      });
+  }
+
+    updateMap = (latLng) => {
             console.log('Success', latLng);
             // this.setState({markers: [...this.state.markers, latLng]});
             // update center state
@@ -51,6 +63,10 @@ export default class MapContainer extends Component {
   };
 
   render() {
+      if (!cookies.get('city')){
+          return (<Navigate to="/"/>)
+      }
+
     return (
         <>
             {/*<a href='/'><img src={logo} style={{height:"100px", width: "100px"}}/></a>*/}
