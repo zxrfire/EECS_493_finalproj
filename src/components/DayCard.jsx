@@ -55,6 +55,7 @@ const DayCard = (props) => {
     // console.log(day.places);
     return day.places.map((place, placeIndex) => (
         <ItineraryPlaceCard
+            key={`Place-${placeIndex}`}
             dayID={dayID}
             place={place}
             placeIndex={placeIndex}

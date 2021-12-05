@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../style/MapContainer.css';
 import {useDrag} from 'react-dnd';
 import {Accordion, Row, Col} from 'react-bootstrap';
 import 'open-iconic/font/css/open-iconic-bootstrap.css';

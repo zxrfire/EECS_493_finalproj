@@ -1,16 +1,13 @@
-import logo from './logo.svg';
 import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import StartPage from './components/StartPage'
-import {Component} from 'react';
-import React from "react";
+import StartPage from './components/StartPage';
+import React, {Component} from 'react';
 import MapContainer from './components/googlemap';
 import moment from 'moment';
-import Day from "./Day";
-import Place from "./Place";
+import Day from './Day';
+import Place from './Place';
 import Cookies from 'universal-cookie';
-
 
 class App extends Component{
   constructor(props) {
@@ -93,6 +90,12 @@ class App extends Component{
     this.setState({days: newDays});
   };
 
+  handleMorePlaceInfo = async (indexOfDay, placeIndex) => {
+    let newDays = [...this.state.days];
+    await newDays[indexOfDay].places[placeIndex].getDetailedInfo();
+    this.setState({days: newDays});
+  };
+
   handleSortTime = (indexOfDay) => {
     let newDays = [...this.state.days];
     newDays[indexOfDay].sortPlaceByTime();
@@ -106,6 +109,21 @@ class App extends Component{
     console.log("Markers");
     console.log(markers);
     return markers;
+  };
+
+  getSelectedPlaces = () => {
+    let places = [];
+    this.state.days.forEach((day, dayIdx) => {
+      if (day.displayMarkers){
+        day.places.forEach((place, placeIdx) => {
+          places.push([dayIdx, placeIdx, place]);
+        });
+      }
+    });
+    return places;
+    // // return the markers along with the day indices
+    // return this.state.days.filter((day, dayIdx) =>
+    //     day.displayMarkers).flat(1);
   };
 
   handleNewRecommendation = (newRecommendations) => {
@@ -159,10 +177,12 @@ class App extends Component{
                       newSortOrder={this.handleSortTime}
                       newDropRecommendation={this.handleDropRecommendation}
                       moreRecInfo={this.handleMoreRecommendationInfo}
+                      morePlaceInfo={this.handleMorePlaceInfo}
                       toggleDisplayMarkers={this.handleToggleDisplayMarkers}
                       clearAttractions={this.handleClearAttractions}
                       deleteAttraction={this.handleDeleteAttraction}
                       getMarkersLatLng={this.getMarkerLatLng}
+                      getSelectedPlaces={this.getSelectedPlaces}
                       setAttractionTime={this.setAttractionTime}
                       setUsedDragDrop={this.handleUseDragDrop}
                     ></MapContainer>

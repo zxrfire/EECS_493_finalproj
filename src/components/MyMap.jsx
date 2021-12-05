@@ -1,37 +1,81 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {GoogleApiWrapper, Map, Marker, InfoWindow} from 'google-maps-react';
-
+import GoogleMap from 'google-map-react';
+import MarkerInfo from './MarkerInfo'
 import key1 from '../key';
+import {Row} from 'react-bootstrap';
+import PlaceDetails from './PlaceDetails';
 
 export class MyMap extends Component{
 
-  state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
-  };
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      showingInfoWindow: false,
+      // markersVisible: Array(this.props.getSelectedPlaces.length).fill(false),
+      activeMarker: {},
+      selectedPlace: {},
+      currentDayIndex: null,
+      currentPlaceIdx: null,
+      place: null,
+    };
+  }
+
+  // componentDidMount() {
+  // }
 
   renderMarkers =  () => {
+    const dayMarkers= this.props.getSelectedPlaces();
+    // const newVisibilities =Array(this.props.getSelectedPlaces.length).fill(false);
+    // this.setState({markersVisible: newVisibilities});
 
-    const markerLatLng = this.props.getMarkersLatLng();
-    console.log(markerLatLng);
-    return markerLatLng.map( (marker, id) =>
-        <Marker key={`Marker${id}`}
-                position={{lat: marker.lat, lng: marker.lng}}
-                onClick={this.onMarkerClick}
-        />
-    );
+    console.log(`Render markers`);
+    console.log(dayMarkers);
+    return dayMarkers.map( (markerTup, markerId) => {
+      const dayID = markerTup[0];
+      const markerPlace = markerTup[2];
+      const {lat, lng} = markerPlace.latLng;
+      console.log(`Marker's Place ${markerPlace}`);
+      return (
+          // <Fragment>
+            <Marker key={`Marker${markerId}`}
+                    place={markerPlace}
+                    dayID={dayID}
+                    placeID={markerTup[1]}
+                    place={markerPlace}
+                    position={{lat: lat, lng: lng}}
+                    onClick={this.onMarkerClick}>
+            </Marker>
+         );
+      });
+
+
+
   };
 
-  onMarkerClick = (props, marker, e) =>
+
+  onMarkerClick = async (props, marker, e) =>{
+    await this.props.morePlaceInfo(props.dayID, props.placeID);
+    console.log(`window appear set to true`);
+    this.setState({
+      place: props.place
+    }, () =>{
       this.setState({
         selectedPlace: props,
         activeMarker: marker,
-        showingInfoWindow: true
+        showingInfoWindow: true,
+        currentDayIndex: props.dayID,
+        currentPlaceIndex: props.placeID,
       });
+    });
+
+
+
+  };
+
 
   onMapClicked = (props) => {
     if (this.state.showingInfoWindow) {
@@ -69,13 +113,23 @@ export class MyMap extends Component{
             }}
         >
           {this.renderMarkers()}
+          {this.state.place &&
           <InfoWindow
+              style={{"minWidth": "20%"}}
               marker={this.state.activeMarker}
               visible={this.state.showingInfoWindow}>
-            <div>
-              <h1>{this.state.selectedPlace.name}</h1>
-            </div>
-          </InfoWindow>
+            <Fragment>
+              <Row>
+                <h6>{this.state.place && this.state.place.address}</h6>
+              </Row>
+              <PlaceDetails place={this.state.place}></PlaceDetails>
+            </Fragment>
+            {/*<iframe width="560" height="315"*/}
+            {/*        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"*/}
+            {/*        title="YouTube video player" frameBorder="0"*/}
+            {/*        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"*/}
+            {/*        allowFullScreen></iframe>*/}
+          </InfoWindow>}
         </Map>
         </div>
     );

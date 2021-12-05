@@ -7,7 +7,7 @@ const PlaceDetails = props => {
   const { place } = props;
 
   const renderImage = () => {
-    return (place.imageURL !== "" &&
+    return (place['imageURL'] && place.imageURL !== "" &&
         <Row className={"mb-2"}>
           <img src={place.imageURL} alt={place.address} />
         </Row>);

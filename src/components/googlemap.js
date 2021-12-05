@@ -87,7 +87,9 @@ export default class MapContainer extends Component {
               <Col xs={12} md={9} style={{padding: 0}}>
                 <MyMap
                     getMarkersLatLng={this.props.getMarkersLatLng}
+                    getSelectedPlaces={this.props.getSelectedPlaces}
                     mapCenter={this.state.mapCenter}
+                    morePlaceInfo={this.props.morePlaceInfo}
                 ></MyMap>
               </Col>
               <Col xs={6} md={3}>

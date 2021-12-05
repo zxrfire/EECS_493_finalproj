@@ -57,3 +57,23 @@
     height: 85%;
     width: 85%;
 }
+.gm-style .gm-style-iw-c {
+    padding-right: 10px !important;
+
+    padding-bottom: 0px !important;
+    max-width: 700px !important;
+    max-height: 500px !important;
+    min-width: 0rem !important;
+    position: absolute;
+    box-sizing: border-box;
+    overflow: visible;
+    top: 0;
+    left: 0;
+    transform: translate(-50%,-100%);
+    /*background-color: #dd9191;*/
+    border-radius: 8px;
+    box-shadow: 0 2px 7px 1px rgba(0,0,0,0.3);
+}
+.gm-style-iw-d{
+    padding-left: 20px !important;
+}

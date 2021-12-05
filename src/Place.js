@@ -1,15 +1,21 @@
 import moment from 'moment';
 import {geocodeByAddress, getLatLng} from 'react-places-autocomplete';
 import key from "./key"
-
+import axios from 'axios';
+import { Loader } from "@googlemaps/js-api-loader"
+const loader = new Loader({
+  apiKey: key,
+  version: "weekly",
+});
 
 class Place {
+  static CORS = "https://warm-savannah-56575.herokuapp.com/";
   constructor(newAddress, geoObj, latLng) {
     this.address = newAddress;
     this.plannedTime = null;
     this.geoObj = geoObj;
     this.latLng = latLng;
-    this.placeID = null;
+    this.place_id = null;
     this.imageURL = null;
     this.hadDetails = false;
   }
@@ -39,8 +45,8 @@ class Place {
     return newPlace;
   };
 
-  static formQuery = (placeID, fields) => {
-    let query = `https://warm-savannah-56575.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&fields=`;
+  static formDetailedQuery = (placeID, fields) => {
+    let query = `${Place.CORS}https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&fields=`;
     const sep = "%2C";
     for (let i = 0; i < fields.length; ++i){
       query += fields[i];
@@ -52,7 +58,41 @@ class Place {
     return query;
   };
 
+  // getImageURL = async (photoReference) => {
+  //   console.log(`https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoReference}&key=${key}`);
+  //   const config = {
+  //     method: 'get',
+  //     url: `${Place.CORS}https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoReference}&key=${key}`,
+  //     headers: {"Access-Control-Allow-Headers": true, 'X-Requested-With': 'XMLHttpRequest'},
+  //     withCredentials: false,
+  //   };
+  //
+  //
+  //   await axios(config).then(
+  //       photoResponse => {
+  //         this.imageURL = photoResponse.data.result;
+  //       }
+  //   )
+
+    // await loader
+    // .load()
+    // .then((google) => {
+    //   [this['photos'][0]].forEach( (placePhoto) =>{
+    //     this.imageURL = google.maps.places.PlacePhoto.getUrl({
+    //       maxWidth: 600,
+    //       maxHeight: 400
+    //     });
+    //   });
+    // })
+    // .catch(e => {
+    //   // do something
+    // });
+  // };
+
   getDetailedInfo = async () => {
+      if (this['geoObj']){
+        this.place_id = this.geoObj.place_id;
+      }
       if (this['place_id'] && !this.hadDetails){
         const axios = require('axios');
         let fields = ["formatted_phone_number",
@@ -66,7 +106,7 @@ class Place {
 
         const config = {
           method: 'get',
-          url: Place.formQuery(this['place_id'], fields),
+          url: Place.formDetailedQuery(this['place_id'], fields),
           headers: {'Access-Control-Allow-Origin': '*'},
           withCredentials: false,
         };
@@ -82,6 +122,12 @@ class Place {
         .catch(function (error) {
           console.log(error);
         });
+
+        // if (this['photos']){
+        //   console.log(`Phref${this.photos[0]['photo_reference']}`);
+        //   const photoRef = this.photos[0]['photo_reference'];
+        //   await this.getImageURL(photoRef);
+        // }
       }
   };
 }
