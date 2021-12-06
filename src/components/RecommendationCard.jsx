@@ -73,9 +73,9 @@ const RecommendationCard = props =>{
 
   return (
       <Fragment>
-        <Accordion.Item eventKey={attractionId}>
+        <Accordion.Item eventKey={attractionId} ref={drag} >
           <Accordion.Header className={"card shadow bg-body rounded"}
-                 ref={drag} onClick={handleCollapse}>
+              onClick={handleCollapse}>
               <div className={"d-flex justify-content-between align-items-center "}
                    data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <span className={"text-center"}>{attraction.address}</span>

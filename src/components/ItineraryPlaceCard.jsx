@@ -8,10 +8,10 @@ import {Button} from 'react-bootstrap';
 
 const ItineraryPlaceCard = props => {
 
-  const {dayID, place, placeIndex, setAttractionTime, deletePlace} = props;
+  const {dayID, place, placeIndex, setAttractionTime, deletePlace, isMuted} = props;
 
   return (
-      <div className={"card shadow-sm p-2 mb-2 bg-body rounded"}>
+      <div className={"card shadow-sm p-2 mb-2 bg-body rounded"} style={{"marginLeft": "-0.75%", "marginRight": "-0.75%"}}>
         <div className={"d-flex justify-content-between align-items-center "}>
           <div className={"col-xs-2 align-middle"}>
             <TimePickerComponent
@@ -24,12 +24,12 @@ const ItineraryPlaceCard = props => {
           </div>
           <div className={"col-xs-7 align-middle"}>
             <div className={"px-3 text-center"}>
-              {place.address}
+              <span className={isMuted ? "text-muted" : ""}>{place.address}</span>
             </div>
           </div>
           <div className={"col-xs-2 align-middle"}>
 
-            <Button variant="danger btn-sm"
+            <Button variant={`${isMuted? "secondary" : "danger"} btn-sm`}
                     onClick={() => deletePlace(dayID, placeIndex)}>
               <span className="oi oi-delete"></span>
             </Button>

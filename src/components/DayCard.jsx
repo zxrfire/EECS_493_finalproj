@@ -62,31 +62,46 @@ const DayCard = (props) => {
             setAttractionTime={setAttractionTime}
             newSortOrder={props.newSortOrder}
             deletePlace={deletePlace}
+            isMuted={!day.displayMarkers}
         ></ItineraryPlaceCard>
     ));
   };
 
   return (
-       <div className={"card day_card shadow-sm p-1 mb-2 bg-white rounded"}
+       <div className={"card day_card shadow-sm p-1 mb-2 bg-white rounded"}  ref={drop}
              // style={{"margin-left": "4%", "margin-right": "4%"}}
        >
          <div className={"card-body"}
-              style={{'minHeight': '150px'}} ref={drop}>
+              style={{'minHeight': '150px'}}>
            <Row className={"mb-2"}>
              <Col xs={12} md={10}>
-               <h5 className="card-title">{getCardTitle()}</h5>
+               <h5 className={"card-title"}>
+                 <span className={day.displayMarkers ? "" : "text-muted"}>{getCardTitle()}</span>
+               </h5>
              <h6 className={"card-subtitle mb-2 text-muted"}>{getCardSubtitle()}</h6>
              </Col>
              <Col xs={6} md={2} >
-               <div className={"form-check  form-switch form-switch-lg"}>
-                 <input className={"form-check-input"} type="checkbox" value=""
+               <div className={""}>
+                 {/*<input className={"form-check-input"} type="checkbox" value=""*/}
+                 {/*       id={`Check${dayID}`} checked={day.displayMarkers}*/}
+                 {/*       onChange={() => toggleMarkers(dayID)}/>*/}
+                 <input className="btn-check" type="checkbox"
+                        value=""
                         id={`Check${dayID}`} checked={day.displayMarkers}
                         onChange={() => toggleMarkers(dayID)}/>
-
+                 <label className={`btn-sm text-center btn-${day.displayMarkers? "primary" : "secondary"}`}
+                        style={{"width": "87%"}}   htmlFor={`Check${dayID}`}>
+                   <span className="oi oi-map-marker"></span>
+                 </label>
                </div>
-               <Button variant="danger" size="sm" onClick={() => clearPlaces(dayID)}>
-                 <span className={"oi oi-trash"}></span>
+               <div className={"mt-1"}>
+
+               <Button className={"text-center"} variant={day.displayMarkers ?
+                   "danger" :
+                   "secondary"} size="sm" onClick={() => clearPlaces(dayID)}>
+                 <span className={"text-center oi oi-trash"}></span>
                </Button>
+               </div>
              </Col>
            </Row>
 
