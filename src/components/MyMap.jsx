@@ -27,6 +27,13 @@ export class MyMap extends Component{
   // componentDidMount() {
   // }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.state !== prevState){
+      console.log("Component updated");
+      this.obtainInfo();
+    }
+  }
+
   renderMarkers =  () => {
     const dayMarkers= this.props.getSelectedPlaces();
     // const newVisibilities =Array(this.props.getSelectedPlaces.length).fill(false);
@@ -56,8 +63,14 @@ export class MyMap extends Component{
 
   };
 
+  obtainInfo = () => {
+    if (this.state.currentDayIndex != null && this.state.currentPlaceIdx != null){
+      this.props.morePlaceInfo(this.state.currentDayIndex, this.state.currentPlaceIdx)
+    }
+  };
 
-  onMarkerClick = async (props, marker, e) =>{
+
+  onMarkerClick = (props, marker, e) =>{
     // await this.props.morePlaceInfo(props.dayID, props.placeID);
     // console.log(`window appear set to true`);
     this.setState({
@@ -66,7 +79,7 @@ export class MyMap extends Component{
         activeMarker: marker,
         showingInfoWindow: true,
         currentDayIndex: props.dayID,
-        currentPlaceIndex: props.placeID,
+        currentPlaceIdx: props.placeID,
     });
 
 
@@ -117,14 +130,10 @@ export class MyMap extends Component{
               visible={this.state.showingInfoWindow}>
             <Fragment>
               <Row>
-                <h6>{this.state.place && this.state.place.address}</h6>
+                <h4>{this.state.place && this.state.place.address}</h4>
               </Row>
               <PlaceDetails place={this.state.place}
-                            morePlaceInfo={() => {
-                              if (this.state.currentDayIndex && this.state.currentPlaceIndex){
-                                this.props.morePlaceInfo(this.state.currentDayIndex, this.state.currentPlaceIdx)
-                              }
-                            }}>
+                            morePlaceInfo={this.obtainInfo}>
               </PlaceDetails>
             </Fragment>
             {/*<iframe width="560" height="315"*/}

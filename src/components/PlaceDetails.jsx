@@ -16,9 +16,11 @@ const PlaceDetails = props => {
 
   useEffect(() => {
     return () => {
-      morePlaceInfo();
+      if (morePlaceInfo){
+        morePlaceInfo();
+      }
     };
-  }, [morePlaceInfo]);
+  }, );
 
 
   const renderRatings = () => {
@@ -36,10 +38,8 @@ const PlaceDetails = props => {
               <span  className={"align-middle"}>{place.rating}/5</span>
             </Col>
           </Fragment>;
-    } else {
-      ratings = <Col xs={11}>Ratings Not Available</Col>;
     }
-    return (
+    return (place.rating &&
         <Row className={"mt-1 align-content-center"}>
           <Col xs={1} className={"d-flex align-items-center justify-content-center"}>
             <span className="oi oi-star"></span>

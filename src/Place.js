@@ -58,21 +58,29 @@ class Place {
     return query;
   };
 
-  // getImageURL = async (photoReference) => {
-  //   console.log(`https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoReference}&key=${key}`);
-  //   const config = {
-  //     method: 'get',
-  //     url: `${Place.CORS}https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoReference}&key=${key}`,
-  //     headers: {"Access-Control-Allow-Headers": true, 'X-Requested-With': 'XMLHttpRequest'},
-  //     withCredentials: false,
-  //   };
-  //
-  //
-  //   await axios(config).then(
-  //       photoResponse => {
-  //         this.imageURL = photoResponse.data.result;
-  //       }
-  //   )
+  getImageURL = async (photoReference) => {
+    console.log(`Getting image`);
+    const url =
+    `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoReference}&sensor=false&maxheight=1600&maxwidth=1600&key=${key}`;
+    console.log(url);
+    // console.log(`https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoReference}&key=${key}`);
+    const config = {
+      method: 'get',
+      url: `${Place.CORS}${url}`,
+      headers: {"Access-Control-Allow-Headers": true, 'X-Requested-With': 'XMLHttpRequest'},
+      withCredentials: false,
+      responseType: 'blob'
+    };
+
+
+    await axios(config).then(
+        photoResponse => {
+          // const imageNode = document.getElementById('image');
+          const imgUrl = URL.createObjectURL(photoResponse.data);
+          console.log(photoResponse);
+          this.imageURL = imgUrl;
+        }
+    );
 
     // await loader
     // .load()
@@ -87,7 +95,7 @@ class Place {
     // .catch(e => {
     //   // do something
     // });
-  // };
+  };
 
   getDetailedInfo = async () => {
       if (this['geoObj']){
@@ -123,11 +131,11 @@ class Place {
           console.log(error);
         });
 
-        // if (this['photos']){
-        //   console.log(`Phref${this.photos[0]['photo_reference']}`);
-        //   const photoRef = this.photos[0]['photo_reference'];
-        //   await this.getImageURL(photoRef);
-        // }
+        if (this['photos']){
+          console.log(`Phref${this.photos[0]['photo_reference']}`);
+          const photoRef = this.photos[0]['photo_reference'];
+          await this.getImageURL(photoRef);
+        }
       }
   };
 }

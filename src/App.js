@@ -137,7 +137,9 @@ class App extends Component{
     let newDays = [...this.state.days];
     let newRecs = [...this.state.recommendations];
     const newRec = this.state.recommendations[recommendationIdx];
-    await newRec.prepGeoLat();
+    if (newRec.prepGeoLat){
+      await newRec.prepGeoLat();
+    }
     newDays[indexOfDay].places.push(newRec);
     this.setState({days: newDays});
     newRecs[recommendationIdx] = newRec;

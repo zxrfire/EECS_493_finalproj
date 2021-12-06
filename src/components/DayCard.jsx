@@ -106,9 +106,9 @@ const DayCard = (props) => {
              </Col>
            </Row>
 
-           <Accordion>
+           {/*<Accordion flush>*/}
            {renderList()}
-           </Accordion>
+           {/*</Accordion>*/}
            <MapSuggestionBox
             value={address}
             onChange={handleChange}
