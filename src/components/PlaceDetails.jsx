@@ -1,10 +1,10 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {Col, Row} from 'react-bootstrap';
 import Rating from 'react-rating';
 
 const PlaceDetails = props => {
 
-  const { place } = props;
+  const { place, morePlaceInfo } = props;
 
   const renderImage = () => {
     return (place['imageURL'] && place.imageURL !== "" &&
@@ -12,6 +12,14 @@ const PlaceDetails = props => {
           <img src={place.imageURL} alt={place.address} />
         </Row>);
   };
+
+
+  useEffect(() => {
+    return () => {
+      morePlaceInfo();
+    };
+  }, [morePlaceInfo]);
+
 
   const renderRatings = () => {
     let ratings;

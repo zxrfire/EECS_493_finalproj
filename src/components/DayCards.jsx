@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'open-iconic/font/css/open-iconic-bootstrap.css';
 import useSmoothScroll from 'react-smooth-scroll-hook';
 import {useScrollWatch} from 'react-smooth-scroll-hook';
+import {Accordion} from 'react-bootstrap';
+import PlaceDetails from './PlaceDetails';
 import gsap from 'gsap';
 
 const DayCards = props => {
@@ -48,6 +50,7 @@ const DayCards = props => {
                    setUsedDragDrop={props.setUsedDragDrop}
           >
           </DayCard>
+
          // {/*</div>*/}
     );
   };

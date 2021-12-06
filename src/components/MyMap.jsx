@@ -58,18 +58,15 @@ export class MyMap extends Component{
 
 
   onMarkerClick = async (props, marker, e) =>{
-    await this.props.morePlaceInfo(props.dayID, props.placeID);
-    console.log(`window appear set to true`);
+    // await this.props.morePlaceInfo(props.dayID, props.placeID);
+    // console.log(`window appear set to true`);
     this.setState({
-      place: props.place
-    }, () =>{
-      this.setState({
+      place: props.place,
         selectedPlace: props,
         activeMarker: marker,
         showingInfoWindow: true,
         currentDayIndex: props.dayID,
         currentPlaceIndex: props.placeID,
-      });
     });
 
 
@@ -122,7 +119,13 @@ export class MyMap extends Component{
               <Row>
                 <h6>{this.state.place && this.state.place.address}</h6>
               </Row>
-              <PlaceDetails place={this.state.place}></PlaceDetails>
+              <PlaceDetails place={this.state.place}
+                            morePlaceInfo={() => {
+                              if (this.state.currentDayIndex && this.state.currentPlaceIndex){
+                                this.props.morePlaceInfo(this.state.currentDayIndex, this.state.currentPlaceIdx)
+                              }
+                            }}>
+              </PlaceDetails>
             </Fragment>
             {/*<iframe width="560" height="315"*/}
             {/*        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"*/}

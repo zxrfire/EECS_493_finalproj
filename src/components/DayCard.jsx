@@ -7,6 +7,7 @@ import '../style/DayCard.css';
 import '../style/MapContainer.css';
 import MapSuggestionBox from './MapSuggestionBox';
 import ItineraryPlaceCard from './ItineraryPlaceCard';
+import {Accordion} from 'react-bootstrap';
 
 const DayCard = (props) => {
   // const visibility = React.useContext(VisibilityContext);
@@ -91,7 +92,7 @@ const DayCard = (props) => {
                         onChange={() => toggleMarkers(dayID)}/>
                  <label className={`btn-sm text-center btn-${day.displayMarkers? "primary" : "secondary"}`}
                         style={{"width": "87%"}}   htmlFor={`Check${dayID}`}>
-                   <span className="oi oi-map-marker"></span>
+                   <span className="oi oi-map-marker align-middle"></span>
                  </label>
                </div>
                <div className={"mt-1"}>
@@ -99,14 +100,15 @@ const DayCard = (props) => {
                <Button className={"text-center"} variant={day.displayMarkers ?
                    "danger" :
                    "secondary"} size="sm" onClick={() => clearPlaces(dayID)}>
-                 <span className={"text-center oi oi-trash"}></span>
+                 <span className={"text-center oi oi-trash align-middle"}></span>
                </Button>
                </div>
              </Col>
            </Row>
 
-
+           <Accordion>
            {renderList()}
+           </Accordion>
            <MapSuggestionBox
             value={address}
             onChange={handleChange}
