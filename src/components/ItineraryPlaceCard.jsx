@@ -29,7 +29,7 @@ const ItineraryPlaceCard = props => {
 
   return (
       // <Accordion.Item eventKey={`day${dayID}place${placeIndex}`}>
-        <div className={"card shadow-sm p-2 mb-2 bg-body rounded"} style={{"marginLeft": "-0.75%", "marginRight": "-0.75%"}}>
+        <div className={"card shadow-sm p-2 mb-2 bg-body rounded"} style={{"marginLeft": "-1.85%", "marginRight": "-1.85%"}}>
             <div className={"d-flex justify-content-between align-items-center "} style={{"minWidth": "95%"}}>
               <div className={"col-xs-2 align-middle"}>
                 <TimePickerComponent

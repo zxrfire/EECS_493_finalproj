@@ -30,16 +30,19 @@ class TimePickerComponent extends Component {
     render() {
         // const time = this.state.value;
         return (
-            <div style={{"width": "48px"}}>
+            <div style={{"width": "50px"}}>
 
             <TimePicker
-                style={{ padding: "0", width: 48}}
-                showSecond={false}
+                style={{ width: "50px"}}
+                showSecond={true}
                 value={this.displayingTime()}
                 placeholder={"--:--"}
                 className="xxx"
-                clearIcon={null}
+                // popupStyle={{"width":"100%"}}
+                // clearIcon={null}
                 allowEmpty={false}
+                // disabledSeconds={}
+                hideDisabledOptions={true}
                 onChange={this.handleChange}
                 onClose={this.props.newSortOrder}
                 // use12Hours={true}

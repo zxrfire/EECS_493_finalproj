@@ -120,22 +120,23 @@ class Place {
         };
 
         await axios(config)
-        .then((response) => {
+        .then(async (response) => {
           console.log(JSON.stringify(response.data));
           this.hadDetails = true;
           for (const [key, value] of Object.entries(response.data.result)) {
             this[key] = value;
+          }
+          if (this.imageURL == null && this['photos']) {
+            console.log(`Phref${this.photos[0]['photo_reference']}`);
+            const photoRef = this.photos[0]['photo_reference'];
+            await this.getImageURL(photoRef);
           }
         })
         .catch(function (error) {
           console.log(error);
         });
 
-        if (this['photos']){
-          console.log(`Phref${this.photos[0]['photo_reference']}`);
-          const photoRef = this.photos[0]['photo_reference'];
-          await this.getImageURL(photoRef);
-        }
+
       }
   };
 }

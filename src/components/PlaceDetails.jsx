@@ -14,18 +14,18 @@ const PlaceDetails = props => {
   };
 
 
-  useEffect(() => {
-    return () => {
+  useEffect( () => {
+    async function fetch(){
       if (morePlaceInfo){
-        morePlaceInfo();
+        await morePlaceInfo();
       }
-    };
+    }
   }, );
 
 
   const renderRatings = () => {
     let ratings;
-    if (place.rating){
+    if (place.rating != null){
       ratings =
           <Fragment>
             <Col xs={7} className={"d-flex align-items-center justify-content-start"}>
@@ -39,7 +39,7 @@ const PlaceDetails = props => {
             </Col>
           </Fragment>;
     }
-    return (place.rating &&
+    return (place.rating !=null &&
         <Row className={"mt-1 align-content-center"}>
           <Col xs={1} className={"d-flex align-items-center justify-content-center"}>
             <span className="oi oi-star"></span>
