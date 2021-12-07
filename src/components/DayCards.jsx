@@ -38,6 +38,7 @@ const DayCards = props => {
         // >
           <DayCard day={day}
                    key={id} dayID={id}
+                   city={props.city}
                    newPlace={props.handleNewAttraction}
                    newSortOrder={() => props.newSortOrder(id)}
                    newDropRecommendation={props.newDropRecommendation}

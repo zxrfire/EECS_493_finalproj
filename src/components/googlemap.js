@@ -74,6 +74,7 @@ export default class MapContainer extends Component {
 
             <DayCards
                 {...this.props}
+                city={this.state.mapCenter}
                 handleNewAttraction={this.handleNewAttraction}
             ></DayCards>
             {/*<div className="scrolling-wrapper">*/}

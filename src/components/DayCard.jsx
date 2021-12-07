@@ -111,6 +111,7 @@ const DayCard = (props) => {
            {/*</Accordion>*/}
            <MapSuggestionBox
             value={address}
+            city={props.city}
             onChange={handleChange}
             onSelect={handleSelect}/>
 

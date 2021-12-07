@@ -40,10 +40,21 @@ const MapSuggestionBox = (props) => {
         </div>
     );
   };
+  // const genSearchOptions = () => {
+  //   const options = {
+  //     location: props.city,
+  //     radius: 1000,
+  //   };
+  //   return options;
+  // };
 
   return (
       <PlacesAutocomplete
           {...props}
+          searchOptions={{
+            location: new window.google.maps.LatLng(props.city),
+            radius: 1000,
+          }}
           requestOptions={'tourist-attractions'}
       >
         {({getInputProps, suggestions, getSuggestionItemProps, loading}) => (

@@ -11,11 +11,10 @@ const cookies = new Cookies();
 function Recommendations (props) {
     let navigate = useNavigate();
 
-    const num = 5;
 
   useEffect(() => {
       getRecommendations()
-  }, [num]);
+  }, [props.mapCenter]);
 
   const getRecommendations = () => {
       if (!props.cityObj){
@@ -23,8 +22,15 @@ function Recommendations (props) {
               <Navigate to="/"/>
           )
       }
-      let service = new window.google.maps.places.PlacesService(document.createElement('div'));
-      service.textSearch({query: props.cityObj.formatted_address + 'points of interest'},
+      const searchLoc = new window.google.maps.LatLng(props.mapCenter);
+      let service = new window.google.maps.places.PlacesService(
+          document.createElement('div')
+      );
+      service.textSearch({
+          location: new window.google.maps.LatLng(props.mapCenter),
+            query: props.cityObj.formatted_address + 'points of interest',
+          radius: 100000,
+          },
               (results, status) => {
                 if (status === window.google.maps.places.PlacesServiceStatus.OK) {
                     console.log(results);
